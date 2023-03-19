@@ -34,3 +34,8 @@ wc_player_data %>% group_by(match_id) %>%
                              inns_2 = sum(Runs[Inns == 2], na.rm = TRUE))
 ```
 
+```{r}
+print('hello')
+```
+
+
