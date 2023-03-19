@@ -45,8 +45,38 @@ wc_matches$winner_wickets <- as.numeric(wc_matches$winner_wickets)
 ```
 
 ```{r}
-wc_matches %>% filter(!is.na(winner_wickets)) %>% 
-  select(match_id, winner_wickets) %>% 
-  summarize(wickets_left = (10 - winner_wickets))
+wicket_resource <- wc_matches %>% filter(!is.na(winner_wickets)) %>% 
+  select(match_id, winner_wickets)
+
+wickets_mov <- c()
+
+for (i in wicket_resource$winner_wickets){
+  if (i == 10) {
+    wickets_mov <- rbind(wickets_mov, 1)
+  } else if (i == 9) {
+    wickets_mov <- rbind(wickets_mov, 0.825)
+  } else if (i == 8) {
+    wickets_mov <- rbind(wickets_mov, 0.611)
+  } else if (i == 7) {
+    wickets_mov <- rbind(wickets_mov, 0.546)
+  } else if (i == 6) {
+    wickets_mov <- rbind(wickets_mov, 0.42)
+  } else if (i == 5) {
+    wickets_mov <- rbind(wickets_mov, 0.312)
+  } else if (i == 4) {
+    wickets_mov <- rbind(wickets_mov, 0.226)
+  } else if (i == 3) {
+    wickets_mov <- rbind(wickets_mov, 0.156)
+  } else if (i == 2) {
+    wickets_mov <- rbind(wickets_mov, 0.098)
+  } else if (i == 1) {
+    wickets_mov <- rbind(wickets_mov,0.047)
+  } else if (i == 0) {
+    wickets_mov <- rbind(wickets_mov, 0)
+  }
+}
+
+wicket_resource <- wicket_resource %>% summarize(match_id = match_id, winner_wickets = winner_wickets, wickets_mov = wickets_mov)
+  
 ```
 
