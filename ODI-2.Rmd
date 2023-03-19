@@ -82,7 +82,7 @@ wicket_resource <- wicket_resource %>% summarize(match_id = match_id, winner_wic
 ```
 
 ```{r}
-wc_
+wc_matches %>% filter(!is.na(winner_runs))
 ```
 
 
