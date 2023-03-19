@@ -18,6 +18,7 @@ knitr::opts_chunk$set(out.width = "60%",fig.align='center')
 
 ```{r}
 wc_player_data <- read.csv("~/Downloads/player_data.csv")
+wc_matches_up <- read.csv("~/Downloads/wc_matches.csv")
 ```
 
 ```{r}
@@ -102,7 +103,6 @@ middle_order_SR <- wc_player_data %>% group_by(match_id) %>%
 temp <- wc_matches %>% filter(!is.na(wc_matches$winner_wickets))
 ```
 
-
 ```{r}
 wc_matches$winner_wickets <- as.numeric(wc_matches$winner_wickets)
 wc_matches$winner_runs <- as.numeric(wc_matches$winner_runs)
@@ -147,5 +147,4 @@ wicket_resource <- wicket_resource %>% summarize(match_id = match_id, winner_wic
 ```{r}
 wc_matches %>% filter(!is.na(winner_runs))
 ```
-
 
