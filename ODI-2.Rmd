@@ -27,18 +27,81 @@ wc_matches <- odi_matches %>% filter(event %in% c("ICC World Cup", "ICC Cricket 
 ```
 
 ```{r}
-wc_player_data %>% group_by(match_id) %>% 
-                   filter(Pos %in% c(1, 2, 3)) %>% 
-                   summarize(inns_1 = sum(Runs[Inns == 1], na.rm = TRUE), 
-                             inns_2 = sum(Runs[Inns == 2], na.rm = TRUE))
+top_order_runs <- wc_player_data %>% group_by(match_id) %>% 
+                                     filter(Pos %in% c(1, 2, 3)) %>% 
+                                     summarize(inns_1 = sum(Runs[Inns == 1], na.rm = TRUE), 
+                                               inns_2 = sum(Runs[Inns == 2], na.rm = TRUE))
+
+middle_order_runs <- wc_player_data %>% group_by(match_id) %>% 
+                                        filter(Pos %in% c(4, 5, 6, 7)) %>% 
+                                        summarize(inns_1 = sum(Runs[Inns == 1], na.rm = TRUE), 
+                                                  inns_2 = sum(Runs[Inns == 2], na.rm = TRUE))
 ```
 
 ```{r}
-wc_player_data %>% group_by(match_id) %>% 
-                   filter(Pos %in% c(4, 5, 6, 7)) %>% 
-                   summarize(inns_1 = sum(Runs[Inns == 1], na.rm = TRUE), 
-                             inns_2 = sum(Runs[Inns == 2], na.rm = TRUE))
+top_order_mins <- wc_player_data %>% group_by(match_id) %>% 
+                                     filter(Pos %in% c(1, 2, 3)) %>% 
+                                     summarize(inns_1 = sum(Mins[Inns == 1], na.rm = TRUE), 
+                                               inns_2 = sum(Mins[Inns == 2], na.rm = TRUE))
+
+middle_order_mins <- wc_player_data %>% group_by(match_id) %>% 
+                                        filter(Pos %in% c(4, 5, 6, 7)) %>% 
+                                        summarize(inns_1 = sum(Mins[Inns == 1], na.rm = TRUE), 
+                                                  inns_2 = sum(Mins[Inns == 2], na.rm = TRUE))
 ```
+
+```{r}
+top_order_bf <- wc_player_data %>% group_by(match_id) %>% 
+                                   filter(Pos %in% c(1, 2, 3)) %>% 
+                                   summarize(inns_1 = sum(BF[Inns == 1], na.rm = TRUE), 
+                                             inns_2 = sum(BF[Inns == 2], na.rm = TRUE))
+
+middle_order_bf <- wc_player_data %>% group_by(match_id) %>% 
+                                      filter(Pos %in% c(4, 5, 6, 7)) %>% 
+                                      summarize(inns_1 = sum(BF[Inns == 1], na.rm = TRUE), 
+                                                inns_2 = sum(BF[Inns == 2], na.rm = TRUE))
+```
+
+```{r}
+top_order_x4 <- wc_player_data %>% group_by(match_id) %>% 
+                                   filter(Pos %in% c(1, 2, 3)) %>% 
+                                   summarize(inns_1 = sum(X4s[Inns == 1], na.rm = TRUE), 
+                                             inns_2 = sum(X4s[Inns == 2], na.rm = TRUE))
+
+middle_order_x4 <- wc_player_data %>% group_by(match_id) %>% 
+                                      filter(Pos %in% c(4, 5, 6, 7)) %>% 
+                                      summarize(inns_1 = sum(X4s[Inns == 1], na.rm = TRUE), 
+                                                inns_2 = sum(X4s[Inns == 2], na.rm = TRUE))
+```
+
+```{r}
+top_order_x6 <- wc_player_data %>% group_by(match_id) %>% 
+                                   filter(Pos %in% c(1, 2, 3)) %>% 
+                                   summarize(inns_1 = sum(X6s[Inns == 1], na.rm = TRUE), 
+                                             inns_2 = sum(X6s[Inns == 2], na.rm = TRUE))
+
+middle_order_x6 <- wc_player_data %>% group_by(match_id) %>% 
+                                      filter(Pos %in% c(4, 5, 6, 7)) %>% 
+                                      summarize(inns_1 = sum(X6s[Inns == 1], na.rm = TRUE), 
+                                                inns_2 = sum(X6s[Inns == 2], na.rm = TRUE))
+```
+
+```{r}
+top_order_SR <- wc_player_data %>% group_by(match_id) %>% 
+                                   filter(Pos %in% c(1, 2, 3)) %>% 
+                                   summarize(inns_1 = mean(SR[Inns == 1], na.rm = TRUE), 
+                                             inns_2 = mean(SR[Inns == 2], na.rm = TRUE))
+
+middle_order_SR <- wc_player_data %>% group_by(match_id) %>% 
+                                      filter(Pos %in% c(4, 5, 6, 7)) %>% 
+                                      summarize(inns_1 = mean(SR[Inns == 1], na.rm = TRUE), 
+                                                inns_2 = mean(SR[Inns == 2], na.rm = TRUE))
+```
+
+```{r}
+temp <- wc_matches %>% filter(!is.na(wc_matches$winner_wickets))
+```
+
 
 ```{r}
 wc_matches$winner_wickets <- as.numeric(wc_matches$winner_wickets)
