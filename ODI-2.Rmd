@@ -41,9 +41,12 @@ wc_player_data %>% group_by(match_id) %>%
 ```
 
 ```{r}
+wc_matches$winner_wickets <- as.numeric(wc_matches$winner_wickets)
+```
+
+```{r}
 wc_matches %>% filter(!is.na(winner_wickets)) %>% 
   select(match_id, winner_wickets) %>% 
   summarize(wickets_left = (10 - winner_wickets))
 ```
-
 
