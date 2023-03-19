@@ -1,0 +1,106 @@
+---
+title: "ODI-1"
+output: html_document
+date: "2023-03-15"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(tinytex)
+library(cricketdata)
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(out.width = "60%",fig.align='center')
+```
+
+### Importing all ODI matches/players
+
+```{r}
+odi_matches <- fetch_cricsheet("match", "male", "odis")
+odi_players <- fetch_cricsheet("player", "male", "odis")
+```
+
+### Filtering World Cup matches (2003, 2007, 2011, 2015, 2019)
+
+```{r}
+wc_matches <- odi_matches %>% filter(event %in% c("ICC World Cup", "ICC Cricket World Cup", "World Cup"))
+```
+
+```{r}
+match_ids <- wc_matches %>% select(match_id, date)
+match_ids$match_id <- as.numeric(as.character(match_ids$match_id))
+match_ids$date <- gsub("/", "-", match_ids$date)
+```
+
+### Finding the playing XIs
+
+```{r}
+wc_players <- odi_players %>% filter(match_id %in% match_ids$match_id)
+wc_players <- merge(wc_players, match_ids, "match_id")
+```
+
+### Importing player_ids
+
+```{r}
+if (FALSE) {
+player <- unique(wc_players$player)
+wc_players_unique <- data.frame(player)
+  
+player_ids <- data.frame()
+
+for (x in wc_players_unique$player) {
+  temp <- find_player_id(x)
+  if (count(temp) == 1) {
+    player_ids <- rbind(player_ids, temp)
+  }
+}
+}
+```
+
+```{r}
+ids <- read.csv("~/Downloads/ids.csv")
+```
+
+### Assigning batting position
+
+```{r}
+i <- 1
+
+for (x in 1:nrow(wc_players)) {
+  wc_players$pos[x] <- i
+  i <- i + 1
+  if (i == 12) {
+    i <- 1
+  }
+}
+```
+
+### Merging player_ids
+
+```{r}
+wc_players <- merge(wc_players, ids, "player")
+```
+
+```{r}
+wc_players$date <- as.Date(wc_players$date)
+wc_players <- rename(wc_players, "Date" = "date")
+```
+
+### Importing player data
+
+```{r}
+if (FALSE) {
+player_data <- data.frame()
+
+for (x in unique(wc_players$player_id)) {
+  dates <- as.list(subset(wc_players, player_id == x, "Date"))
+  temp <- fetch_player_data(x, "odi", "batting") %>% filter(Date %in% dates[["Date"]])
+  temp <- cbind(temp, x)
+  player_data <- rbind(player_data, temp)
+}
+}
+```
+
