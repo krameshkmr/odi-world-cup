@@ -28,6 +28,17 @@ wc_matches <- odi_matches %>% filter(event %in% c("ICC World Cup", "ICC Cricket 
 ```
 
 ```{r}
+wc_matches$winner_wickets <- as.numeric(wc_matches$winner_wickets)
+wc_matches$winner_runs <- as.numeric(wc_matches$winner_runs)
+wc_matches$match_id <- as.numeric(wc_matches$match_id)
+```
+
+```{r}
+left_join(wc_matches, wc_matches_up)
+```
+
+
+```{r}
 top_order_runs <- wc_player_data %>% group_by(match_id) %>% 
                                      filter(Pos %in% c(1, 2, 3)) %>% 
                                      summarize(inns_1 = sum(Runs[Inns == 1], na.rm = TRUE), 
@@ -104,11 +115,6 @@ temp <- wc_matches %>% filter(!is.na(wc_matches$winner_wickets))
 ```
 
 ```{r}
-wc_matches$winner_wickets <- as.numeric(wc_matches$winner_wickets)
-wc_matches$winner_runs <- as.numeric(wc_matches$winner_runs)
-```
-
-```{r}
 wicket_resource <- wc_matches %>% filter(!is.na(winner_wickets)) %>% 
   select(match_id, winner_wickets)
 
@@ -145,6 +151,6 @@ wicket_resource <- wicket_resource %>% summarize(match_id = match_id, winner_wic
 ```
 
 ```{r}
-wc_matches %>% filter(!is.na(winner_runs))
+wc_matches_up
 ```
 
