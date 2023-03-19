@@ -35,7 +35,11 @@ wc_player_data %>% group_by(match_id) %>%
 ```
 
 ```{r}
-print('hello')
+odi_matches <- fetch_cricsheet("match", "male", "odis")
+odi_players <- fetch_cricsheet("player", "male", "odis")
 ```
 
+```{r}
+wc_matches <- odi_matches %>% filter(event %in% c("ICC World Cup", "ICC Cricket World Cup", "World Cup"))
+```
 
