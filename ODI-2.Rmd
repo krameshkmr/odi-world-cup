@@ -21,6 +21,12 @@ wc_player_data <- read.csv("~/Downloads/player_data.csv")
 ```
 
 ```{r}
+odi_matches <- fetch_cricsheet("match", "male", "odis")
+odi_players <- fetch_cricsheet("player", "male", "odis")
+wc_matches <- odi_matches %>% filter(event %in% c("ICC World Cup", "ICC Cricket World Cup", "World Cup"))
+```
+
+```{r}
 wc_player_data %>% group_by(match_id) %>% 
                    filter(Pos %in% c(1, 2, 3)) %>% 
                    summarize(inns_1 = sum(Runs[Inns == 1], na.rm = TRUE), 
@@ -35,11 +41,9 @@ wc_player_data %>% group_by(match_id) %>%
 ```
 
 ```{r}
-odi_matches <- fetch_cricsheet("match", "male", "odis")
-odi_players <- fetch_cricsheet("player", "male", "odis")
+wc_matches %>% filter(!is.na(winner_wickets)) %>% 
+  select(match_id, winner_wickets) %>% 
+  summarize(wickets_left = (10 - winner_wickets))
 ```
 
-```{r}
-wc_matches <- odi_matches %>% filter(event %in% c("ICC World Cup", "ICC Cricket World Cup", "World Cup"))
-```
 
