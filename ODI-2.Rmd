@@ -188,7 +188,6 @@ middle_time_resource <- left_join(total_time, middle_order_mins, "match_id") %>%
   summarize(match_id = match_id, middle_time_pct = inns_1/total_time)
 ```
 
-
 ```{r}
 temp3 <- merge(wicket_resource, ball_resource, "match_id")
 limit_resource <- temp3 %>% summarize(match_id = match_id, inns_2_mov = ifelse(wickets_mov > balls_mov, balls_mov, wickets_mov))
@@ -221,12 +220,8 @@ top_6_resource <- left_join(total_6, top_order_x6, "match_id") %>%
   summarize(match_id = match_id, top_6_pct = inns_1/total_6)
 ```
 
-
 ```{r}
 wc_matches_final <- full_join(run_resource, limit_resource, "match_id")
 wc_matches_final <- cbind(wc_matches_final, top_order_resource$top_order_pct, middle_order_resource$middle_order_pct, top_bf_resource$top_bf_pct, middle_bf_resource$middle_bf_pct, top_order_SR$inns_1, middle_order_SR$inns_1, top_time_resource$top_time_pct, middle_time_resource$middle_time_pct, top_4_resource$top_4_pct, top_6_resource$top_6_pct)
 ```
-
-
-
 
