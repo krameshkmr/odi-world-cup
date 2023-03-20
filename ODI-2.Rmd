@@ -34,7 +34,8 @@ wc_matches$match_id <- as.numeric(wc_matches$match_id)
 ```
 
 ```{r}
-temp <- left_join(wc_matches, wc_matches_up, "match_id")
+temp <- wc_matches_up %>% select(match_id, balls_remaining)
+wc_matches <- left_join(wc_matches, temp, "match_id")
 ```
 
 ```{r}
