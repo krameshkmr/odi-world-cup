@@ -78,6 +78,10 @@ temp2 <- odi_wc %>% ggplot(aes(middle_sr)) +
   theme_bw()
 
 grid.arrange(temp1, temp2)
+
+which(odi_wc$middle_sr > 200)
+
+odi_wc[c(28, 31, 82, 100),]
 ```
 
 ```{r}
