@@ -150,6 +150,12 @@ wicket_resource <- wicket_resource %>% summarize(match_id = match_id, wickets_mo
 ball_resource <- wc_matches %>% filter(!is.na(balls_remaining)) %>% 
   select(match_id, balls_remaining) %>% 
   summarize(match_id = match_id, balls_mov = balls_remaining/300)
+
+top_bf_resource <- top_order_bf %>%
+  summarize(match_id = match_id, bf_pct = inns_1/300)
+
+middle_bf_resource <- middle_order_bf %>%
+  summarize(match_id = match_id, bf_pct = inns_1/300)
 ```
 
 ```{r}
