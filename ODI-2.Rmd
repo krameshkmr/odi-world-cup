@@ -142,7 +142,7 @@ for (i in wicket_resource$winner_wickets){
   }
 }
 
-wicket_resource <- wicket_resource %>% summarize(match_id = match_id, winner_wickets = winner_wickets, wickets_mov = wickets_mov)
+wicket_resource <- wicket_resource %>% summarize(match_id = match_id, wickets_mov = wickets_mov)
   
 ```
 
@@ -151,6 +151,7 @@ ball_resource <- wc_matches %>% filter(!is.na(balls_remaining)) %>%
   select(match_id, balls_remaining) %>% 
   summarize(match_id = match_id, balls_mov = balls_remaining/300)
 ```
+
 ```{r}
 target <- wc_player_data %>% group_by(match_id) %>% 
   filter(Inns == 1) %>% 
@@ -164,8 +165,10 @@ run_resource <- left_join(target, temp2, "match_id") %>%
 ```
 
 ```{r}
-
+temp3 <- merge(wicket_resource, ball_resource, "match_id")
+temp4 <- temp3 %>% summarize(match_id = match_id, inns_2_mov = ifelse(wickets_mov > balls_mov, balls_mov, wickets_mov))
 ```
+
 
 
 
