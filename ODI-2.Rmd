@@ -161,9 +161,6 @@ top_bf_resource <- left_join(total_balls, top_order_bf, "match_id") %>%
 
 middle_bf_resource <- left_join(total_balls, middle_order_bf, "match_id") %>%
   summarize(match_id = match_id, middle_bf_pct = inns_1/total_balls)
-
-merge(top_bf_resource, middle_bf_resource, "match_id") %>%
-  summarize(match_id = match_id, top_bf_pct = top_bf_pct, middle_bf_pct = middle_bf_pct, x = top_bf_pct + middle_bf_pct)
 ```
 
 ```{r}
@@ -207,8 +204,21 @@ merge(top_order_resource, middle_order_resource, "match_id") %>%
 ```
 
 ```{r}
-wc_player_data %>%
-  
+total_4 <- wc_player_data %>% group_by(match_id) %>% 
+  filter(Inns == 1) %>% 
+  summarize(match_id = match_id, total_4 = sum(X4s, na.rm = TRUE)) %>%
+  unique()
+
+top_4_resource <- left_join(total_4, top_order_x4, "match_id") %>%
+  summarize(match_id = match_id, top_4_pct = inns_1/total_4)
+
+total_6 <- wc_player_data %>% group_by(match_id) %>% 
+  filter(Inns == 1) %>% 
+  summarize(match_id = match_id, total_6 = sum(X6s, na.rm = TRUE)) %>%
+  unique()
+
+top_6_resource <- left_join(total_6, top_order_x6, "match_id") %>%
+  summarize(match_id = match_id, top_6_pct = inns_1/total_6)
 ```
 
 
