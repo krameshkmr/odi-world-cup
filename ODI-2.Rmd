@@ -165,12 +165,35 @@ run_resource <- left_join(target, temp2, "match_id") %>%
 ```
 
 ```{r}
+total_time <- wc_player_data %>% group_by(match_id) %>% 
+  filter(Inns == 1) %>% 
+  summarize(match_id = match_id, total_time = sum(Mins, na.rm = TRUE)) %>%
+  unique()
+
+top_time_resource <- left_join(total_time, top_order_mins, "match_id") %>%
+  summarize(match_id = match_id, top_time_pct = inns_1/total_time)
+
+middle_time_resource <- left_join(total_time, middle_order_mins, "match_id") %>%
+  summarize(match_id = match_id, middle_time_pct = inns_1/total_time)
+```
+
+
+```{r}
 temp3 <- merge(wicket_resource, ball_resource, "match_id")
-temp4 <- temp3 %>% summarize(match_id = match_id, inns_2_mov = ifelse(wickets_mov > balls_mov, balls_mov, wickets_mov))
+limit_resource <- temp3 %>% summarize(match_id = match_id, inns_2_mov = ifelse(wickets_mov > balls_mov, balls_mov, wickets_mov))
+
+top_order_resource <- merge(top_order_runs, target) %>%
+  summarize(match_id = match_id, top_order_pct = inns_1/target)
+
+middle_order_resource <- merge(middle_order_runs, target) %>%
+  summarize(match_id = match_id, middle_order_pct = inns_1/target)
+
+merge(top_order_resource, middle_order_resource, "match_id") %>%
+  summarize(match_id = match_id, top_order_pct = top_order_pct, middle_order_pct = middle_order_pct, x = top_order_pct + middle_order_pct)
 ```
 
 ```{r}
-wc_matches_final <- full_join(run_resource, temp4, "match_id")
+wc_matches_final <- full_join(run_resource, limit_resource, "match_id")
 ```
 
 
