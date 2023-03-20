@@ -151,11 +151,19 @@ ball_resource <- wc_matches %>% filter(!is.na(balls_remaining)) %>%
   select(match_id, balls_remaining) %>% 
   summarize(match_id = match_id, balls_mov = balls_remaining/300)
 
-top_bf_resource <- top_order_bf %>%
-  summarize(match_id = match_id, bf_pct = inns_1/300)
+total_balls <- wc_player_data %>% group_by(match_id) %>% 
+  filter(Inns == 1) %>% 
+  summarize(match_id = match_id, total_balls = sum(BF, na.rm = TRUE)) %>%
+  unique() 
 
-middle_bf_resource <- middle_order_bf %>%
-  summarize(match_id = match_id, bf_pct = inns_1/300)
+top_bf_resource <- left_join(total_balls, top_order_bf, "match_id") %>%
+  summarize(match_id = match_id, top_bf_pct = inns_1/total_balls)
+
+middle_bf_resource <- left_join(total_balls, middle_order_bf, "match_id") %>%
+  summarize(match_id = match_id, middle_bf_pct = inns_1/total_balls)
+
+merge(top_bf_resource, middle_bf_resource, "match_id") %>%
+  summarize(match_id = match_id, top_bf_pct = top_bf_pct, middle_bf_pct = middle_bf_pct, x = top_bf_pct + middle_bf_pct)
 ```
 
 ```{r}
@@ -197,6 +205,12 @@ middle_order_resource <- merge(middle_order_runs, target) %>%
 merge(top_order_resource, middle_order_resource, "match_id") %>%
   summarize(match_id = match_id, top_order_pct = top_order_pct, middle_order_pct = middle_order_pct, x = top_order_pct + middle_order_pct)
 ```
+
+```{r}
+wc_player_data %>%
+  
+```
+
 
 ```{r}
 wc_matches_final <- full_join(run_resource, limit_resource, "match_id")
