@@ -8,6 +8,7 @@ date: "2023-03-20"
 library(tidyverse)
 library(knitr)
 library(tinytex)
+library(gridExtra)
 library(cricketdata)
 
 knitr::opts_chunk$set(echo = TRUE)
@@ -18,4 +19,45 @@ knitr::opts_chunk$set(out.width = "60%",fig.align='center')
 
 ```{r}
 odi_wc <- read.csv("~/Downloads/odi_wc.csv")
+odi_wc$year <- substr(odi_wc$date, 1, 4)
 ```
+
+```{r}
+odi_wc %>% 
+```
+
+
+```{r}
+odi_wc %>% ggplot(aes(top_runs_pct)) + 
+  geom_histogram(color = "black", fill = "skyblue") +
+  facet_wrap(year ~.)
+
+odi_wc %>% ggplot(aes(middle_runs_pct)) + 
+  geom_histogram(color = "black", fill = "skyblue") +
+  facet_wrap(year ~.)
+```
+```{r}
+odi_wc %>% ggplot(aes(top_time_pct)) + 
+  geom_histogram(color = "black", fill = "skyblue") +
+  facet_wrap(year ~.)
+
+odi_wc %>% ggplot(aes(middle_time_pct)) + 
+  geom_histogram(color = "black", fill = "skyblue") +
+  facet_wrap(year ~.)
+```
+
+```{r}
+temp1 <- odi_wc %>% ggplot(aes(top_sr)) + geom_boxplot(color = "black", fill = "skyblue") + scale_x_continuous(limits = c(0, 250), breaks = seq(0,250, 50))
+temp2 <- odi_wc %>% ggplot(aes(middle_sr)) + geom_boxplot(color = "black", fill = "red") + scale_x_continuous(limits = c(0, 250), breaks = seq(0,250, 50))
+
+grid.arrange(temp1, temp2)
+```
+
+
+
+```{r}
+odi_wc[,c(-1,-2)] %>% 
+  na.omit() %>% 
+  cor()
+```
+
