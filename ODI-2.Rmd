@@ -151,4 +151,8 @@ ball_resource <- wc_matches %>% filter(!is.na(balls_remaining)) %>%
   select(match_id, balls_remaining) %>% 
   summarize(match_id = match_id, balls_mov = balls_remaining/300)
 ```
+```{r}
+
+```
+
 
