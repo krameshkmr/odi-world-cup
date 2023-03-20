@@ -147,6 +147,8 @@ wicket_resource <- wicket_resource %>% summarize(match_id = match_id, winner_wic
 ```
 
 ```{r}
-
+ball_resource <- wc_matches %>% filter(!is.na(balls_remaining)) %>% 
+  select(match_id, balls_remaining) %>% 
+  summarize(match_id = match_id, balls_mov = balls_remaining/300)
 ```
 
