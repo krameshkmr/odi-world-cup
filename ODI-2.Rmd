@@ -169,6 +169,10 @@ temp3 <- merge(wicket_resource, ball_resource, "match_id")
 temp4 <- temp3 %>% summarize(match_id = match_id, inns_2_mov = ifelse(wickets_mov > balls_mov, balls_mov, wickets_mov))
 ```
 
+```{r}
+wc_matches_final <- full_join(run_resource, temp4, "match_id")
+```
+
 
 
 
