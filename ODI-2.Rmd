@@ -152,7 +152,15 @@ ball_resource <- wc_matches %>% filter(!is.na(balls_remaining)) %>%
   summarize(match_id = match_id, balls_mov = balls_remaining/300)
 ```
 ```{r}
+target <- wc_player_data %>% group_by(match_id) %>% 
+  filter(Inns == 1) %>% 
+  summarize(match_id = match_id, target = sum(Runs, na.rm = TRUE)) %>%
+  unique()
 
+temp2 <- wc_matches %>% select(match_id, winner_runs)
+
+run_resource <- left_join(target, temp2, "match_id") %>%
+  summarize(match_id = match_id, run_mov = winner_runs/target)
 ```
 
 
