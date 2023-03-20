@@ -211,6 +211,9 @@ total_4 <- wc_player_data %>% group_by(match_id) %>%
 top_4_resource <- left_join(total_4, top_order_x4, "match_id") %>%
   summarize(match_id = match_id, top_4_pct = inns_1/total_4)
 
+middle_4_resource <- left_join(total_4, middle_order_x4, "match_id") %>%
+  summarize(match_id = match_id, middle_4_pct = inns_1/total_4)
+
 total_6 <- wc_player_data %>% group_by(match_id) %>% 
   filter(Inns == 1) %>% 
   summarize(match_id = match_id, total_6 = sum(X6s, na.rm = TRUE)) %>%
@@ -218,6 +221,9 @@ total_6 <- wc_player_data %>% group_by(match_id) %>%
 
 top_6_resource <- left_join(total_6, top_order_x6, "match_id") %>%
   summarize(match_id = match_id, top_6_pct = inns_1/total_6)
+
+middle_6_resource <- left_join(total_6, middle_order_x6, "match_id") %>%
+  summarize(match_id = match_id, middle_6_pct = inns_1/total_6)
 ```
 
 ```{r}
@@ -226,6 +232,32 @@ match_date <- wc_player_data %>% select(match_id, Date) %>% unique()
 
 ```{r}
 wc_matches_final <- full_join(run_resource, limit_resource, "match_id")
-wc_matches_final <- cbind(match_date, top_order_resource$top_order_pct, middle_order_resource$middle_order_pct, top_bf_resource$top_bf_pct, middle_bf_resource$middle_bf_pct, top_order_SR$inns_1, middle_order_SR$inns_1, top_time_resource$top_time_pct, middle_time_resource$middle_time_pct, top_4_resource$top_4_pct, top_6_resource$top_6_pct, wc_matches_final)
+wc_matches_final <- cbind(match_date, top_order_resource$top_order_pct, middle_order_resource$middle_order_pct, top_bf_resource$top_bf_pct, middle_bf_resource$middle_bf_pct, top_order_SR$inns_1, middle_order_SR$inns_1, top_time_resource$top_time_pct, middle_time_resource$middle_time_pct, top_4_resource$top_4_pct, middle_4_resource$middle_4_pct, top_6_resource$top_6_pct, middle_6_resource$middle_6_pct, wc_matches_final)
+```
+
+```{r}
+middle_6_resource$middle_6_pct[is.nan(middle_6_resource$middle_6_pct)] <- NA
+wc_matches_final[sapply(wc_matches_final, is.nan)] <- NA
+
+wc_matches_final <- wc_matches_final[-c(15, 17)]
+
+wc_matches_final <- rename(wc_matches_final, "date" = "Date", 
+                           "top_runs_pct" = "top_order_resource$top_order_pct", 
+                           "middle_runs_pct" = "middle_order_resource$middle_order_pct", 
+                           "top_bf_pct" = "top_bf_resource$top_bf_pct", 
+                           "middle_bf_pct" = "middle_bf_resource$middle_bf_pct", 
+                           "top_sr" = "top_order_SR$inns_1", 
+                           "middle_sr" = "middle_order_SR$inns_1", 
+                           "top_time_pct" = "top_time_resource$top_time_pct", 
+                           "middle_time_pct" = "middle_time_resource$middle_time_pct", 
+                           "top_x4s_pct" = "top_4_resource$top_4_pct", 
+                           "middle_x4s_pct" = "middle_4_resource$middle_4_pct", 
+                           "top_x6s_pct" = "top_6_resource$top_6_pct", 
+                           "middle_x6s_pct" = "middle_6_resource$middle_6_pct", 
+                           "mov" = "run_mov")
+```
+
+```{r}
+write.csv(wc_matches_final, "~/Downloads/odi_wc.csv", row.names = FALSE)
 ```
 
