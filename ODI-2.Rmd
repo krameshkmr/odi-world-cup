@@ -34,9 +34,8 @@ wc_matches$match_id <- as.numeric(wc_matches$match_id)
 ```
 
 ```{r}
-left_join(wc_matches, wc_matches_up)
+temp <- left_join(wc_matches, wc_matches_up, "match_id")
 ```
-
 
 ```{r}
 top_order_runs <- wc_player_data %>% group_by(match_id) %>% 
@@ -111,10 +110,6 @@ middle_order_SR <- wc_player_data %>% group_by(match_id) %>%
 ```
 
 ```{r}
-temp <- wc_matches %>% filter(!is.na(wc_matches$winner_wickets))
-```
-
-```{r}
 wicket_resource <- wc_matches %>% filter(!is.na(winner_wickets)) %>% 
   select(match_id, winner_wickets)
 
@@ -148,9 +143,5 @@ for (i in wicket_resource$winner_wickets){
 
 wicket_resource <- wicket_resource %>% summarize(match_id = match_id, winner_wickets = winner_wickets, wickets_mov = wickets_mov)
   
-```
-
-```{r}
-wc_matches_up
 ```
 
