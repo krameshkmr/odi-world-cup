@@ -220,8 +220,22 @@ top_6_resource <- left_join(total_6, top_order_x6, "match_id") %>%
   summarize(match_id = match_id, top_6_pct = inns_1/total_6)
 ```
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+>>>>>>> Stashed changes
 ```{r}
-wc_matches_final <- full_join(run_resource, limit_resource, "match_id")
-wc_matches_final <- cbind(wc_matches_final, top_order_resource$top_order_pct, middle_order_resource$middle_order_pct, top_bf_resource$top_bf_pct, middle_bf_resource$middle_bf_pct, top_order_SR$inns_1, middle_order_SR$inns_1, top_time_resource$top_time_pct, middle_time_resource$middle_time_pct, top_4_resource$top_4_pct, top_6_resource$top_6_pct)
+match_date <- wc_player_data %>% select(match_id, Date) %>% unique() 
 ```
 
+<<<<<<< Updated upstream
+=======
+
+=======
+>>>>>>> 9036835812dfbc7d70f445c054d09414780546c0
+```{r}
+wc_matches_final <- full_join(run_resource, limit_resource, "match_id")
+wc_matches_final <- cbind(match_date, top_order_resource$top_order_pct, middle_order_resource$middle_order_pct, top_bf_resource$top_bf_pct, middle_bf_resource$middle_bf_pct, top_order_SR$inns_1, middle_order_SR$inns_1, top_time_resource$top_time_pct, middle_time_resource$middle_time_pct, top_4_resource$top_4_pct, top_6_resource$top_6_pct, wc_matches_final)
+```
+
+>>>>>>> Stashed changes
