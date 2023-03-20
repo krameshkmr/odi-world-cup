@@ -224,6 +224,7 @@ top_6_resource <- left_join(total_6, top_order_x6, "match_id") %>%
 
 ```{r}
 wc_matches_final <- full_join(run_resource, limit_resource, "match_id")
+wc_matches_final <- cbind(wc_matches_final, top_order_resource$top_order_pct, middle_order_resource$middle_order_pct, top_bf_resource$top_bf_pct, middle_bf_resource$middle_bf_pct, top_order_SR$inns_1, middle_order_SR$inns_1, top_time_resource$top_time_pct, middle_time_resource$middle_time_pct, top_4_resource$top_4_pct, top_6_resource$top_6_pct)
 ```
 
 
