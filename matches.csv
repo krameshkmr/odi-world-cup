@@ -1,0 +1,236 @@
+match_id,team1,team2,date,match_number,toss_winner,toss_decision,player_of_match,winner,winner_wickets,balls_remaining,winner_runs,outcome,method
+65235,West Indies,South Africa,2/9/03,1,West Indies,bat,BC Lara,West Indies,NA,NA,3,NA,NA
+65236,Zimbabwe,Namibia,2/10/03,2,Namibia,field,CB Wishart,Zimbabwe,NA,NA,86,NA,D/L
+65237,Sri Lanka,New Zealand,2/10/03,3,New Zealand,field,ST Jayasuriya,Sri Lanka,NA,NA,47,NA,NA
+65238,Australia,Pakistan,2/11/03,4,Pakistan,field,A Symonds,Australia,NA,NA,82,NA,NA
+65239,Canada,Bangladesh,2/11/03,5,Canada,bat,A Codrington,Canada,NA,NA,60,NA,NA
+65240,Kenya,South Africa,2/12/03,6,Kenya,bat,L Klusener,South Africa,10,172,NA,NA,NA
+65241,India,Netherlands,2/12/03,7,India,bat,TBM de Leede,India,NA,NA,68,NA,NA
+65242,New Zealand,West Indies,2/13/03,9,West Indies,field,AR Adams,New Zealand,NA,NA,20,NA,NA
+65244,India,Australia,2/15/03,11,India,bat,JN Gillespie,Australia,9,166,NA,NA,NA
+65245,Canada,Kenya,2/15/03,12,Canada,bat,TM Odoyo,Kenya,4,9,NA,NA,NA
+65246,Netherlands,England,2/16/03,13,England,field,JM Anderson,England,6,160,NA,NA,NA
+65247,Pakistan,Namibia,2/16/03,14,Pakistan,bat,Wasim Akram,Pakistan,NA,NA,171,NA,NA
+65248,South Africa,New Zealand,2/16/03,15,South Africa,bat,SP Fleming,New Zealand,9,13,NA,NA,D/L
+65250,India,Zimbabwe,2/19/03,17,Zimbabwe,field,SR Tendulkar,India,NA,NA,83,NA,NA
+65251,Canada,Sri Lanka,2/19/03,18,Sri Lanka,field,RAP Nissanka,Sri Lanka,9,272,NA,NA,NA
+65252,England,Namibia,2/19/03,19,Namibia,field,AJ Burger,England,NA,NA,55,NA,NA
+65254,Bangladesh,South Africa,2/22/03,22,South Africa,field,M Ntini,South Africa,10,228,NA,NA,NA
+65255,England,Pakistan,2/22/03,23,England,bat,JM Anderson,England,NA,NA,112,NA,NA
+65256,Canada,West Indies,2/23/03,24,West Indies,field,JM Davison,West Indies,7,177,NA,NA,NA
+65257,India,Namibia,2/23/03,25,Namibia,field,SR Tendulkar,India,NA,NA,181,NA,NA
+65258,Kenya,Sri Lanka,2/24/03,26,Sri Lanka,field,CO Obuya,Kenya,NA,NA,53,NA,NA
+65259,Zimbabwe,Australia,2/24/03,27,Zimbabwe,bat,AM Blignaut,Australia,7,15,NA,NA,NA
+65260,Pakistan,Netherlands,2/25/03,28,Netherlands,field,Mohammad Yousuf,Pakistan,NA,NA,97,NA,NA
+65261,Bangladesh,New Zealand,2/26/03,29,Bangladesh,bat,CD McMillan,New Zealand,7,99,NA,NA,NA
+65262,India,England,2/26/03,30,India,bat,A Nehra,India,NA,NA,82,NA,NA
+65263,Australia,Namibia,2/27/03,31,Australia,bat,GD McGrath,Australia,NA,NA,256,NA,NA
+65264,South Africa,Canada,2/27/03,32,Canada,field,HH Dippenaar,South Africa,NA,NA,118,NA,NA
+65265,Zimbabwe,Netherlands,2/28/03,33,Netherlands,field,HH Streak,Zimbabwe,NA,NA,99,NA,NA
+65266,Sri Lanka,West Indies,2/28/03,34,Sri Lanka,bat,WPUJC Vaas,Sri Lanka,NA,NA,6,NA,NA
+65267,Kenya,Bangladesh,3/1/03,35,Kenya,bat,MO Odumbe,Kenya,NA,NA,32,NA,NA
+65268,Pakistan,India,3/1/03,36,Pakistan,bat,SR Tendulkar,India,6,26,NA,NA,NA
+65269,England,Australia,3/2/03,37,England,bat,AJ Bichel,Australia,2,2,NA,NA,NA
+65270,Canada,New Zealand,3/3/03,38,New Zealand,field,JM Davison,New Zealand,5,162,NA,NA,NA
+65271,Netherlands,Namibia,3/3/03,39,Netherlands,bat,JF Kloppenburg,Netherlands,NA,NA,64,NA,NA
+65272,Sri Lanka,South Africa,3/3/03,40,Sri Lanka,bat,MS Atapattu,NA,NA,NA,0,tie,D/L
+65275,Australia,Sri Lanka,3/7/03,NA,Australia,bat,RT Ponting,Australia,NA,NA,96,NA,NA
+65276,Kenya,India,3/7/03,NA,Kenya,bat,SC Ganguly,India,6,13,NA,NA,NA
+65277,Zimbabwe,New Zealand,3/8/03,NA,Zimbabwe,bat,NJ Astle,New Zealand,6,16,NA,NA,NA
+65278,India,Sri Lanka,3/10/03,NA,Sri Lanka,field,J Srinath,India,NA,NA,183,NA,NA
+65279,Australia,New Zealand,3/11/03,NA,New Zealand,field,SE Bond,Australia,NA,NA,96,NA,NA
+65280,Zimbabwe,Kenya,3/12/03,NA,Zimbabwe,bat,MA Suji,Kenya,7,144,NA,NA,NA
+65281,New Zealand,India,3/14/03,NA,India,field,Z Khan,India,7,56,NA,NA,NA
+65282,Sri Lanka,Zimbabwe,3/15/03,NA,Sri Lanka,bat,MS Atapattu,Sri Lanka,NA,NA,74,NA,NA
+65283,Kenya,Australia,3/15/03,NA,Australia,field,AY Karim,Australia,5,112,NA,NA,NA
+65284,Australia,Sri Lanka,3/18/03,NA,Australia,bat,A Symonds,Australia,NA,NA,48,NA,D/L
+65285,India,Kenya,3/20/03,NA,India,bat,SC Ganguly,India,NA,NA,91,NA,NA
+65286,Australia,India,3/23/03,NA,India,field,RT Ponting,Australia,NA,NA,125,NA,NA
+247457,West Indies,Pakistan,3/13/07,1,Pakistan,field,DR Smith,West Indies,NA,NA,54,NA,NA
+247458,Australia,Scotland,3/14/07,2,Scotland,field,RT Ponting,Australia,NA,NA,203,NA,NA
+247460,Bermuda,Sri Lanka,3/15/07,4,Sri Lanka,bat,DPMD Jayawardene,Sri Lanka,NA,NA,243,NA,NA
+247461,Ireland,Zimbabwe,3/15/07,5,Zimbabwe,field,JP Bray,NA,NA,NA,0,tie,NA
+247462,Netherlands,South Africa,3/16/07,7,Netherlands,field,HH Gibbs,South Africa,NA,NA,221,NA,NA
+247463,England,New Zealand,3/16/07,6,New Zealand,field,SB Styris,New Zealand,6,54,NA,NA,NA
+247464,Bangladesh,India,3/17/07,8,India,bat,Mashrafe Mortaza,Bangladesh,5,9,NA,NA,NA
+247465,Ireland,Pakistan,3/17/07,9,Ireland,field,NJ O'Brien,Ireland,3,32,NA,NA,D/L
+247466,Australia,Netherlands,3/18/07,10,Australia,bat,BJ Hodge,Australia,NA,NA,229,NA,NA
+247467,Canada,England,3/18/07,11,Canada,field,PD Collingwood,England,NA,NA,51,NA,NA
+247468,Bermuda,India,3/19/07,12,Bermuda,field,V Sehwag,India,NA,NA,257,NA,NA
+247469,West Indies,Zimbabwe,3/19/07,13,West Indies,field,SC Williams,West Indies,6,13,NA,NA,NA
+247470,Scotland,South Africa,3/20/07,15,South Africa,field,GC Smith,South Africa,7,160,NA,NA,NA
+247471,Kenya,New Zealand,3/20/07,14,Kenya,field,LRPL Taylor,New Zealand,NA,NA,148,NA,NA
+247472,Bangladesh,Sri Lanka,3/21/07,16,Bangladesh,field,ST Jayasuriya,Sri Lanka,NA,NA,198,NA,D/L
+247473,Pakistan,Zimbabwe,3/21/07,17,Zimbabwe,field,Imran Nazir,Pakistan,NA,NA,93,NA,D/L
+247474,Netherlands,Scotland,3/22/07,19,Netherlands,field,WF Stelling,Netherlands,8,157,NA,NA,NA
+247475,Canada,New Zealand,3/22/07,18,Canada,field,L Vincent,New Zealand,NA,NA,114,NA,NA
+247476,India,Sri Lanka,3/23/07,20,India,field,M Muralitharan,Sri Lanka,NA,NA,69,NA,NA
+247477,West Indies,Ireland,3/23/07,21,Ireland,bat,S Chanderpaul,West Indies,8,59,NA,NA,D/L
+247478,Australia,South Africa,3/24/07,22,South Africa,field,ML Hayden,Australia,NA,NA,83,NA,NA
+247479,England,Kenya,3/24/07,23,Kenya,bat,EC Joyce,England,7,60,NA,NA,NA
+247481,West Indies,Australia,3/27/07,25,West Indies,field,ML Hayden,Australia,NA,NA,103,NA,NA
+247482,South Africa,Sri Lanka,3/28/07,26,Sri Lanka,bat,CK Langeveldt,South Africa,1,10,NA,NA,NA
+247483,West Indies,New Zealand,3/29/07,27,New Zealand,field,JDP Oram,New Zealand,7,64,NA,NA,NA
+247484,England,Ireland,3/30/07,28,England,bat,PD Collingwood,England,NA,NA,48,NA,NA
+247485,Australia,Bangladesh,3/31/07,29,Australia,field,GD McGrath,Australia,10,49,NA,NA,NA
+247486,West Indies,Sri Lanka,4/1/07,30,West Indies,field,ST Jayasuriya,Sri Lanka,NA,NA,113,NA,NA
+247487,Bangladesh,New Zealand,4/2/07,31,New Zealand,field,SE Bond,New Zealand,9,124,NA,NA,NA
+247488,Ireland,South Africa,4/3/07,32,South Africa,field,JH Kallis,South Africa,7,21,NA,NA,D/L
+247489,England,Sri Lanka,4/4/07,33,England,field,RS Bopara,Sri Lanka,NA,NA,2,NA,NA
+247490,Bangladesh,South Africa,4/7/07,34,South Africa,field,Mohammad Ashraful,Bangladesh,NA,NA,67,NA,NA
+247491,Australia,England,4/8/07,35,England,bat,SW Tait,Australia,7,16,NA,NA,NA
+247492,Ireland,New Zealand,4/9/07,36,New Zealand,bat,PG Fulton,New Zealand,NA,NA,129,NA,NA
+247493,West Indies,South Africa,4/10/07,37,West Indies,field,AB de Villiers,South Africa,NA,NA,67,NA,NA
+247494,Bangladesh,England,4/11/07,38,England,field,SI Mahmood,England,4,31,NA,NA,NA
+247495,New Zealand,Sri Lanka,4/12/07,39,New Zealand,bat,WPUJC Vaas,Sri Lanka,6,29,NA,NA,NA
+247496,Australia,Ireland,4/13/07,40,Australia,field,GD McGrath,Australia,9,226,NA,NA,NA
+247497,New Zealand,South Africa,4/14/07,41,New Zealand,field,CD McMillan,New Zealand,5,10,NA,NA,NA
+247498,Bangladesh,Ireland,4/15/07,42,Ireland,bat,WTS Porterfield,Ireland,NA,NA,74,NA,NA
+247499,Australia,Sri Lanka,4/16/07,43,Sri Lanka,bat,NW Bracken,Australia,7,44,NA,NA,NA
+247500,England,South Africa,4/17/07,44,England,bat,AJ Hall,South Africa,9,184,NA,NA,NA
+247501,Ireland,Sri Lanka,4/18/07,45,Sri Lanka,field,MF Maharoof,Sri Lanka,8,240,NA,NA,NA
+247502,West Indies,Bangladesh,4/19/07,46,Bangladesh,field,RR Sarwan,West Indies,NA,NA,99,NA,NA
+247503,Australia,New Zealand,4/20/07,47,Australia,bat,ML Hayden,Australia,NA,NA,215,NA,NA
+247504,West Indies,England,4/21/07,48,England,field,KP Pietersen,England,1,1,NA,NA,NA
+247505,New Zealand,Sri Lanka,4/24/07,NA,Sri Lanka,bat,DPMD Jayawardene,Sri Lanka,NA,NA,81,NA,NA
+247506,Australia,South Africa,4/25/07,NA,South Africa,bat,GD McGrath,Australia,7,111,NA,NA,NA
+247507,Australia,Sri Lanka,4/28/07,NA,Australia,bat,AC Gilchrist,Australia,NA,NA,53,NA,D/L
+433558,Bangladesh,India,2/19/11,1,Bangladesh,field,V Sehwag,India,NA,NA,87,NA,NA
+433559,Kenya,New Zealand,2/20/11,2,Kenya,bat,HK Bennett,New Zealand,10,252,NA,NA,NA
+433560,Sri Lanka,Canada,2/20/11,3,Sri Lanka,bat,DPMD Jayawardene,Sri Lanka,NA,NA,210,NA,NA
+433561,Australia,Zimbabwe,2/21/11,4,Australia,bat,SR Watson,Australia,NA,NA,91,NA,NA
+433562,England,Netherlands,2/22/11,5,Netherlands,bat,RN ten Doeschate,England,6,8,NA,NA,NA
+433563,Kenya,Pakistan,2/23/11,6,Pakistan,bat,Umar Akmal,Pakistan,NA,NA,205,NA,NA
+433564,South Africa,West Indies,2/24/11,7,South Africa,field,AB de Villiers,South Africa,7,43,NA,NA,NA
+433565,Australia,New Zealand,2/25/11,8,Australia,field,MG Johnson,Australia,7,96,NA,NA,NA
+433566,Bangladesh,Ireland,2/25/11,9,Bangladesh,bat,Tamim Iqbal,Bangladesh,NA,NA,27,NA,NA
+433567,Sri Lanka,Pakistan,2/26/11,10,Pakistan,bat,Shahid Afridi,Pakistan,NA,NA,11,NA,NA
+433568,India,England,2/27/11,11,India,bat,AJ Strauss,NA,NA,NA,0,tie,NA
+433569,Netherlands,West Indies,2/28/11,13,Netherlands,field,KAJ Roach,West Indies,NA,NA,215,NA,NA
+433570,Canada,Zimbabwe,2/28/11,12,Zimbabwe,bat,T Taibu,Zimbabwe,NA,NA,175,NA,NA
+433571,Sri Lanka,Kenya,3/1/11,14,Kenya,bat,SL Malinga,Sri Lanka,9,188,NA,NA,NA
+433572,England,Ireland,3/2/11,15,England,bat,KJ O'Brien,Ireland,3,5,NA,NA,NA
+433573,Netherlands,South Africa,3/3/11,16,Netherlands,field,AB de Villiers,South Africa,NA,NA,231,NA,NA
+433574,Canada,Pakistan,3/3/11,17,Pakistan,bat,Shahid Afridi,Pakistan,NA,NA,46,NA,NA
+433575,New Zealand,Zimbabwe,3/4/11,18,Zimbabwe,bat,MJ Guptill,New Zealand,10,99,NA,NA,NA
+433576,Bangladesh,West Indies,3/4/11,19,Bangladesh,bat,KAJ Roach,West Indies,9,226,NA,NA,NA
+433578,India,Ireland,3/6/11,22,India,field,Yuvraj Singh,India,5,24,NA,NA,NA
+433579,England,South Africa,3/6/11,21,England,bat,RS Bopara,England,NA,NA,6,NA,NA
+433580,Canada,Kenya,3/7/11,23,Kenya,bat,H Osinde,Canada,5,27,NA,NA,NA
+433581,New Zealand,Pakistan,3/8/11,24,New Zealand,bat,LRPL Taylor,New Zealand,NA,NA,110,NA,NA
+433582,India,Netherlands,3/9/11,25,Netherlands,bat,Yuvraj Singh,India,5,81,NA,NA,NA
+433583,Sri Lanka,Zimbabwe,3/10/11,26,Zimbabwe,field,TM Dilshan,Sri Lanka,NA,NA,139,NA,NA
+433584,Ireland,West Indies,3/11/11,27,Ireland,field,KA Pollard,West Indies,NA,NA,44,NA,NA
+433585,Bangladesh,England,3/11/11,28,Bangladesh,field,Imrul Kayes,Bangladesh,2,6,NA,NA,NA
+433586,India,South Africa,3/12/11,29,India,bat,DW Steyn,South Africa,3,2,NA,NA,NA
+433587,Canada,New Zealand,3/13/11,30,Canada,field,BB McCullum,New Zealand,NA,NA,97,NA,NA
+433588,Australia,Kenya,3/13/11,31,Australia,bat,CO Obuya,Australia,NA,NA,60,NA,NA
+433589,Pakistan,Zimbabwe,3/14/11,33,Zimbabwe,bat,Umar Gul,Pakistan,7,23,NA,NA,D/L
+433590,Bangladesh,Netherlands,3/14/11,32,Netherlands,bat,Imrul Kayes,Bangladesh,6,52,NA,NA,NA
+433591,Ireland,South Africa,3/15/11,34,Ireland,field,JP Duminy,South Africa,NA,NA,131,NA,NA
+433592,Australia,Canada,3/16/11,35,Canada,bat,SR Watson,Australia,7,91,NA,NA,NA
+433593,England,West Indies,3/17/11,36,England,bat,JC Tredwell,England,NA,NA,18,NA,NA
+433594,New Zealand,Sri Lanka,3/18/11,38,Sri Lanka,bat,KC Sangakkara,Sri Lanka,NA,NA,112,NA,NA
+433595,Ireland,Netherlands,3/18/11,37,Ireland,field,PR Stirling,Ireland,6,14,NA,NA,NA
+433596,Australia,Pakistan,3/19/11,40,Australia,bat,Umar Akmal,Pakistan,4,54,NA,NA,NA
+433597,Bangladesh,South Africa,3/19/11,39,South Africa,bat,LL Tsotsobe,South Africa,NA,NA,206,NA,NA
+433598,Kenya,Zimbabwe,3/20/11,41,Zimbabwe,bat,CR Ervine,Zimbabwe,NA,NA,161,NA,NA
+433599,India,West Indies,3/20/11,42,India,bat,Yuvraj Singh,India,NA,NA,80,NA,NA
+433600,Pakistan,West Indies,3/23/11,NA,West Indies,bat,Mohammad Hafeez,Pakistan,10,175,NA,NA,NA
+433601,India,Australia,3/24/11,NA,Australia,bat,Yuvraj Singh,India,5,14,NA,NA,NA
+433602,New Zealand,South Africa,3/25/11,NA,New Zealand,bat,JDP Oram,New Zealand,NA,NA,49,NA,NA
+433603,Sri Lanka,England,3/26/11,NA,England,bat,TM Dilshan,Sri Lanka,10,63,NA,NA,NA
+433604,Sri Lanka,New Zealand,3/29/11,NA,New Zealand,bat,KC Sangakkara,Sri Lanka,5,13,NA,NA,NA
+433605,India,Pakistan,3/30/11,NA,India,bat,SR Tendulkar,India,NA,NA,29,NA,NA
+433606,India,Sri Lanka,4/2/11,NA,Sri Lanka,bat,MS Dhoni,India,6,10,NA,NA,NA
+656399,New Zealand,Sri Lanka,2/14/15,1,Sri Lanka,field,CJ Anderson,New Zealand,NA,NA,98,NA,NA
+656401,Australia,England,2/14/15,2,England,field,AJ Finch,Australia,NA,NA,111,NA,NA
+656403,South Africa,Zimbabwe,2/15/15,3,Zimbabwe,field,DA Miller,South Africa,NA,NA,62,NA,NA
+656405,India,Pakistan,2/15/15,4,India,bat,V Kohli,India,NA,NA,76,NA,NA
+656407,Ireland,West Indies,2/16/15,5,Ireland,field,PR Stirling,Ireland,4,25,NA,NA,NA
+656409,New Zealand,Scotland,2/17/15,6,New Zealand,field,TA Boult,New Zealand,3,151,NA,NA,NA
+656411,Afghanistan,Bangladesh,2/18/15,7,Bangladesh,bat,Mushfiqur Rahim,Bangladesh,NA,NA,105,NA,NA
+656413,United Arab Emirates,Zimbabwe,2/19/15,8,Zimbabwe,field,SC Williams,Zimbabwe,4,12,NA,NA,NA
+656415,New Zealand,England,2/20/15,9,England,bat,TG Southee,New Zealand,8,226,NA,NA,NA
+656417,Pakistan,West Indies,2/21/15,10,Pakistan,field,AD Russell,West Indies,NA,NA,150,NA,NA
+656421,Afghanistan,Sri Lanka,2/22/15,12,Sri Lanka,field,DPMD Jayawardene,Sri Lanka,4,10,NA,NA,NA
+656423,India,South Africa,2/22/15,13,India,bat,S Dhawan,India,NA,NA,130,NA,NA
+656425,England,Scotland,2/23/15,14,Scotland,field,MM Ali,England,NA,NA,119,NA,NA
+656427,West Indies,Zimbabwe,2/24/15,15,West Indies,bat,CH Gayle,West Indies,NA,NA,73,NA,D/L
+656429,Ireland,United Arab Emirates,2/25/15,16,Ireland,field,GC Wilson,Ireland,2,4,NA,NA,NA
+656431,Afghanistan,Scotland,2/26/15,17,Afghanistan,field,Samiullah Shenwari,Afghanistan,1,3,NA,NA,NA
+656435,South Africa,West Indies,2/27/15,19,South Africa,bat,AB de Villiers,South Africa,NA,NA,257,NA,NA
+656437,New Zealand,Australia,2/28/15,20,Australia,bat,TA Boult,New Zealand,1,161,NA,NA,NA
+656439,India,United Arab Emirates,2/28/15,21,United Arab Emirates,bat,R Ashwin,India,9,187,NA,NA,NA
+656441,England,Sri Lanka,3/1/15,22,England,bat,KC Sangakkara,Sri Lanka,9,16,NA,NA,NA
+656443,Pakistan,Zimbabwe,3/1/15,23,Pakistan,bat,Wahab Riaz,Pakistan,NA,NA,20,NA,NA
+656445,Ireland,South Africa,3/3/15,24,South Africa,bat,HM Amla,South Africa,NA,NA,201,NA,NA
+656447,Pakistan,United Arab Emirates,3/4/15,25,United Arab Emirates,field,Ahmed Shehzad,Pakistan,NA,NA,129,NA,NA
+656449,Australia,Afghanistan,3/4/15,26,Afghanistan,field,DA Warner,Australia,NA,NA,275,NA,NA
+656451,Bangladesh,Scotland,3/5/15,27,Bangladesh,field,KJ Coetzer,Bangladesh,6,11,NA,NA,NA
+656453,India,West Indies,3/6/15,28,West Indies,bat,Mohammed Shami,India,4,65,NA,NA,NA
+656455,Pakistan,South Africa,3/7/15,29,South Africa,field,Sarfraz Ahmed,Pakistan,NA,NA,29,NA,D/L
+656457,Ireland,Zimbabwe,3/7/15,30,Zimbabwe,field,EC Joyce,Ireland,NA,NA,5,NA,NA
+656459,New Zealand,Afghanistan,3/8/15,31,Afghanistan,bat,DL Vettori,New Zealand,6,83,NA,NA,NA
+656461,Australia,Sri Lanka,3/8/15,32,Australia,bat,GJ Maxwell,Australia,NA,NA,64,NA,NA
+656463,Bangladesh,England,3/9/15,33,England,field,Mahmudullah,Bangladesh,NA,NA,15,NA,NA
+656465,India,Ireland,3/10/15,34,Ireland,bat,S Dhawan,India,8,79,NA,NA,NA
+656467,Scotland,Sri Lanka,3/11/15,35,Sri Lanka,bat,KC Sangakkara,Sri Lanka,NA,NA,148,NA,NA
+656469,South Africa,United Arab Emirates,3/12/15,36,United Arab Emirates,field,AB de Villiers,South Africa,NA,NA,146,NA,NA
+656471,New Zealand,Bangladesh,3/13/15,37,New Zealand,field,MJ Guptill,New Zealand,3,7,NA,NA,NA
+656473,Afghanistan,England,3/13/15,38,England,field,CJ Jordan,England,9,41,NA,NA,D/L
+656475,India,Zimbabwe,3/14/15,39,India,field,SK Raina,India,6,8,NA,NA,NA
+656477,Australia,Scotland,3/14/15,40,Australia,field,MA Starc,Australia,7,208,NA,NA,NA
+656479,United Arab Emirates,West Indies,3/15/15,41,West Indies,field,JO Holder,West Indies,6,117,NA,NA,NA
+656481,Ireland,Pakistan,3/15/15,42,Ireland,bat,Sarfraz Ahmed,Pakistan,7,23,NA,NA,NA
+656483,South Africa,Sri Lanka,3/18/15,NA,Sri Lanka,bat,Imran Tahir,South Africa,9,192,NA,NA,NA
+656485,Bangladesh,India,3/19/15,NA,India,bat,RG Sharma,India,NA,NA,109,NA,NA
+656487,Australia,Pakistan,3/20/15,NA,Pakistan,bat,JR Hazlewood,Australia,6,97,NA,NA,NA
+656489,New Zealand,West Indies,3/21/15,NA,New Zealand,bat,MJ Guptill,New Zealand,NA,NA,143,NA,NA
+656491,New Zealand,South Africa,3/24/15,NA,South Africa,bat,GD Elliott,New Zealand,4,1,NA,NA,D/L
+656493,Australia,India,3/26/15,NA,Australia,bat,SPD Smith,Australia,NA,NA,95,NA,NA
+656495,Australia,New Zealand,3/29/15,NA,New Zealand,bat,JP Faulkner,Australia,7,101,NA,NA,NA
+1144483,England,South Africa,5/30/19,1,South Africa,field,BA Stokes,England,NA,NA,104,NA,NA
+1144484,Pakistan,West Indies,5/31/19,2,West Indies,field,O Thomas,West Indies,7,218,NA,NA,NA
+1144485,New Zealand,Sri Lanka,6/1/19,3,New Zealand,field,MJ Henry,New Zealand,10,203,NA,NA,NA
+1144486,Afghanistan,Australia,6/1/19,4,Afghanistan,bat,DA Warner,Australia,7,91,NA,NA,NA
+1144487,Bangladesh,South Africa,6/2/19,5,South Africa,field,Shakib Al Hasan,Bangladesh,NA,NA,21,NA,NA
+1144488,England,Pakistan,6/3/19,6,England,field,Mohammad Hafeez,Pakistan,NA,NA,14,NA,NA
+1144489,Afghanistan,Sri Lanka,6/4/19,7,Afghanistan,field,N Pradeep,Sri Lanka,NA,NA,34,NA,D/L
+1144490,India,South Africa,6/5/19,8,South Africa,bat,RG Sharma,India,6,15,NA,NA,NA
+1144491,Bangladesh,New Zealand,6/5/19,9,New Zealand,field,LRPL Taylor,New Zealand,2,17,NA,NA,NA
+1144492,Australia,West Indies,6/6/19,10,West Indies,field,NM Coulter-Nile,Australia,NA,NA,15,NA,NA
+1144494,England,Bangladesh,6/8/19,12,Bangladesh,field,JJ Roy,England,NA,NA,106,NA,NA
+1144495,Afghanistan,New Zealand,6/8/19,13,New Zealand,field,JDS Neesham,New Zealand,7,107,NA,NA,NA
+1144496,Australia,India,6/9/19,14,India,bat,S Dhawan,India,NA,NA,36,NA,NA
+1144499,Australia,Pakistan,6/12/19,17,Pakistan,field,DA Warner,Australia,NA,NA,41,NA,NA
+1144501,England,West Indies,6/14/19,19,England,field,JE Root,England,8,101,NA,NA,NA
+1144502,Australia,Sri Lanka,6/15/19,20,Sri Lanka,field,AJ Finch,Australia,NA,NA,87,NA,NA
+1144503,Afghanistan,South Africa,6/15/19,21,South Africa,field,Imran Tahir,South Africa,9,116,NA,NA,D/L
+1144504,India,Pakistan,6/16/19,22,Pakistan,field,RG Sharma,India,NA,NA,89,NA,D/L
+1144505,Bangladesh,West Indies,6/17/19,23,Bangladesh,field,Shakib Al Hasan,Bangladesh,7,51,NA,NA,NA
+1144506,England,Afghanistan,6/18/19,24,England,bat,EJG Morgan,England,NA,NA,150,NA,NA
+1144507,New Zealand,South Africa,6/19/19,25,New Zealand,field,KS Williamson,New Zealand,4,3,NA,NA,NA
+1144508,Australia,Bangladesh,6/20/19,26,Australia,bat,DA Warner,Australia,NA,NA,48,NA,NA
+1144509,England,Sri Lanka,6/21/19,27,Sri Lanka,bat,SL Malinga,Sri Lanka,NA,NA,20,NA,NA
+1144510,Afghanistan,India,6/22/19,28,India,bat,JJ Bumrah,India,NA,NA,11,NA,NA
+1144511,New Zealand,West Indies,6/22/19,29,West Indies,field,KS Williamson,New Zealand,NA,NA,5,NA,NA
+1144512,Pakistan,South Africa,6/23/19,30,Pakistan,bat,Haris Sohail,Pakistan,NA,NA,49,NA,NA
+1144513,Afghanistan,Bangladesh,6/24/19,31,Afghanistan,field,Shakib Al Hasan,Bangladesh,NA,NA,62,NA,NA
+1144514,England,Australia,6/25/19,32,England,field,AJ Finch,Australia,NA,NA,64,NA,NA
+1144515,New Zealand,Pakistan,6/26/19,33,New Zealand,bat,Babar Azam,Pakistan,6,5,NA,NA,NA
+1144516,India,West Indies,6/27/19,34,India,bat,V Kohli,India,NA,NA,125,NA,NA
+1144517,South Africa,Sri Lanka,6/28/19,35,South Africa,field,D Pretorius,South Africa,9,76,NA,NA,NA
+1144518,Afghanistan,Pakistan,6/29/19,36,Afghanistan,bat,Imad Wasim,Pakistan,3,2,NA,NA,NA
+1144519,Australia,New Zealand,6/29/19,37,Australia,bat,AT Carey,Australia,NA,NA,86,NA,NA
+1144520,England,India,6/30/19,38,England,bat,JM Bairstow,England,NA,NA,31,NA,NA
+1144521,Sri Lanka,West Indies,7/1/19,39,West Indies,field,WIA Fernando,Sri Lanka,NA,NA,23,NA,NA
+1144522,Bangladesh,India,7/2/19,40,India,bat,RG Sharma,India,NA,NA,28,NA,NA
+1144523,England,New Zealand,7/3/19,41,England,bat,JM Bairstow,England,NA,NA,119,NA,NA
+1144524,Afghanistan,West Indies,7/4/19,42,West Indies,bat,SD Hope,West Indies,NA,NA,23,NA,NA
+1144525,Bangladesh,Pakistan,7/5/19,43,Pakistan,bat,Shaheen Shah Afridi,Pakistan,NA,NA,94,NA,NA
+1144526,India,Sri Lanka,7/6/19,44,Sri Lanka,bat,RG Sharma,India,7,39,NA,NA,NA
+1144527,Australia,South Africa,7/6/19,45,South Africa,bat,F du Plessis,South Africa,NA,NA,10,NA,NA
+1144528,India,New Zealand,7/9/19,NA,New Zealand,bat,MJ Henry,New Zealand,NA,NA,18,NA,NA
+1144529,Australia,England,7/11/19,NA,Australia,bat,CR Woakes,England,8,107,NA,NA,NA
+1144530,England,New Zealand,7/14/19,NA,New Zealand,bat,BA Stokes,NA,NA,NA,0,tie,NA
