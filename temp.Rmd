@@ -1,0 +1,100 @@
+---
+title: "temp"
+output: html_document
+date: "2023-04-05"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(tinytex)
+library(cricketdata)
+library(leaps)
+```
+
+```{r}
+odi <- read.csv("~/Downloads/odi.csv")
+odi$date <- as.Date(odi$date)
+odi$date <- format(odi$date, "%Y")
+odi <- rename(odi, year = date)
+```
+
+```{r}
+round(cor(odi[, 6:20]), 2)
+```
+
+```{r}
+odi %>% group_by(year) %>% 
+        summarize(to_mins_pct = round(cor(to_mins_pct, mov), 2),
+                  mo_mins_pct = round(cor(mo_mins_pct, mov), 2),
+                  pct_4s = round(cor(pct_4s, mov), 2),
+                  pct_6s = round(cor(pct_6s, mov), 2),
+                  to_sr = round(cor(to_sr, mov), 2),
+                  mo_sr = round(cor(mo_sr, mov), 2),
+                  pct_mdns = round(cor(pct_mdns, mov), 2),
+                  wkts = round(cor(wkts, mov), 2),
+                  econ = round(cor(econ, mov), 2))
+```
+
+```{r}
+qualified <- c("Afghanistan", "Australia", "Bangladesh", "England", "India",
+               "New Zealand", "Pakistan", "South Africa", "Sri Lanka", "West Indies")
+
+team_cor <- odi %>% group_by(team1) %>% 
+                    summarize(to_mins_pct = round(cor(to_mins_pct, mov), 2),
+                    mo_mins_pct = round(cor(mo_mins_pct, mov), 2),
+                    pct_4s = round(cor(pct_4s, mov), 2),
+                    pct_6s = round(cor(pct_6s, mov), 2),
+                    to_sr = round(cor(to_sr, mov), 2),
+                    mo_sr = round(cor(mo_sr, mov), 2),
+                    pct_mdns = round(cor(pct_mdns, mov), 2),
+                    wkts = round(cor(wkts, mov), 2),
+                    econ = round(cor(econ, mov), 2))
+
+team_cor %>% filter(team1 %in% qualified)
+```
+
+```{r}
+model_bwd <- regsubsets(mov~.,data=odi[, 6:20],method='backward',nvmax=14)
+summary(model_bwd)$adjr2
+summary(model_bwd)$outmat
+```
+
+```{r}
+model_1 <- lm(mov~.-mo_mins_pct-pct_4s-bowlers_used, data=odi[, 6:20])
+summary(model_1)
+```
+
+```{r}
+train_set <- odi %>% filter(year %in% c(2003, 2007, 2011, 2015))
+train_set <- train_set[, 6:20] %>% select(-c("mo_mins_pct", "pct_4s", "bowlers_used"))
+```
+
+```{r}
+test_set <- odi %>% filter(year == 2019)
+test_set <- test_set[, 6:20] %>% select(-c("mo_mins_pct", "pct_4s", "bowlers_used"))
+```
+
+```{r}
+model_train <- lm(mov~., data=train_set)
+summary(model_train)
+```
+
+```{r}
+predictions <- predict(model_train, test_set)
+mse <- mean((test_set$mov - predictions)^2)
+r_squared <- summary(model_train)$r.squared
+mse
+r_squared
+```
+
+```{r}
+odi <- odi[, 6:20] %>% select(-c("mo_mins_pct", "pct_4s", "bowlers_used"))
+
+predictions <- predict(model_train, odi)
+mse <- mean((test_set$mov - predictions)^2)
+r_squared <- summary(model_train)$r.squared
+mse
+r_squared
+```
+
