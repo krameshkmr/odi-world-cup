@@ -1,0 +1,101 @@
+---
+title: "ODI-2"
+output: html_document
+date: "2023-03-19"
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(tinytex)
+library(cricketdata)
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(out.width = "60%",fig.align='center')
+```
+
+```{r}
+matches <- read.csv("~/Downloads/matches.csv")
+player_data <- read.csv("~/Downloads/player_data.csv")
+```
+
+```{r}
+matches <- matches[is.na(matches$method), ]
+won_bf <- matches[!is.na(matches$winner_runs), ]
+won_bs <- matches[is.na(matches$winner_runs), ]
+```
+
+```{r}
+player_data <- player_data %>% group_by(match_id) %>% 
+                               filter(match_id %in% matches$match_id) %>% 
+                               filter(inns == 1) %>% 
+                               summarize(to_runs_pct = sum(runs[pos %in% c(1, 2, 3)], na.rm = TRUE) / sum(runs, na.rm = TRUE),
+                                         mo_runs_pct = sum(runs[pos %in% c(4, 5, 6, 7)], na.rm = TRUE) / sum(runs, na.rm = TRUE),
+                                         to_mins_pct = sum(mins[pos %in% c(1, 2, 3)], na.rm = TRUE) / sum(mins, na.rm = TRUE),
+                                         mo_mins_pct = sum(mins[pos %in% c(4, 5, 6, 7)], na.rm = TRUE) / sum(mins, na.rm = TRUE),
+                                         to_bf_pct = sum(bf[pos %in% c(1, 2, 3)], na.rm = TRUE) / sum(bf, na.rm = TRUE),
+                                         mo_bf_pct = sum(bf[pos %in% c(4, 5, 6, 7)], na.rm = TRUE) / sum(bf, na.rm = TRUE),
+                                         pct_4s = (sum(x4s, na.rm = TRUE) * 4) / sum(runs, na.rm = TRUE),
+                                         pct_6s = (sum(x6s, na.rm = TRUE) * 6) / sum(runs, na.rm = TRUE),
+                                         to_sr = round(mean(sr[pos %in% c(1, 2, 3)], na.rm = TRUE), 2),
+                                         mo_sr = round(mean(sr[pos %in% c(4, 5, 6, 7)], na.rm = TRUE), 2),
+                                         target = sum(runs, na.rm = TRUE) + 1,
+                                         bowlers_used = sum(!is.na(overs)),
+                                         pct_mdns = sum(mdns, na.rm = TRUE) / sum(overs, na.rm = TRUE),
+                                         wkts = sum(wkts, na.rm = TRUE),
+                                         econ = mean(econ, na.rm = TRUE))
+```
+
+```{r}
+run_resource <- left_join(matches[c("match_id", "winner_runs")], player_data[c("match_id", "target")], "match_id") %>% 
+                filter(match_id %in% won_bf$match_id) %>% 
+                summarize(match_id = match_id,
+                          mov = round(winner_runs / target, 3))
+```
+
+```{r}
+limiting_resource <- won_bs[c("match_id", "winner_wickets")]
+wickets_mov <- c()
+
+for (i in limiting_resource$winner_wickets) {
+  if (i == 10) {
+    wickets_mov <- rbind(wickets_mov, 1.000)
+  } else if (i == 9) {
+    wickets_mov <- rbind(wickets_mov, 0.825)
+  } else if (i == 8) {
+    wickets_mov <- rbind(wickets_mov, 0.611)
+  } else if (i == 7) {
+    wickets_mov <- rbind(wickets_mov, 0.546)
+  } else if (i == 6) {
+    wickets_mov <- rbind(wickets_mov, 0.420)
+  } else if (i == 5) {
+    wickets_mov <- rbind(wickets_mov, 0.312)
+  } else if (i == 4) {
+    wickets_mov <- rbind(wickets_mov, 0.226)
+  } else if (i == 3) {
+    wickets_mov <- rbind(wickets_mov, 0.156)
+  } else if (i == 2) {
+    wickets_mov <- rbind(wickets_mov, 0.098)
+  } else if (i == 1) {
+    wickets_mov <- rbind(wickets_mov, 0.047)
+  } else {
+    wickets_mov <- rbind(wickets_mov, 0.000)
+  }
+}
+
+limiting_resource <- cbind(limiting_resource, wickets_mov, won_bs$balls_remaining) %>% 
+                     summarize(match_id = match_id,
+                               wickets_mov = wickets_mov,
+                               balls_mov = round(won_bs$balls_remaining / 300, 3)) %>% 
+                     summarize(match_id = match_id,
+                               mov = ifelse(wickets_mov > balls_mov, -1 * balls_mov, -1 * wickets_mov))
+```
+
+```{r}
+mov <- rbind(run_resource, limiting_resource)
+player_data <- left_join(player_data[, -12], mov, "match_id")
+odi <- full_join(matches[, c(1, 4, 2, 3, 9)], player_data, "match_id")
+```
+
