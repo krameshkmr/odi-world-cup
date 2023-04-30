@@ -102,3 +102,27 @@ for (i in 1:14) {
 }
 ```
 
+```{r}
+#permanently remove one variable
+train_min2 <- train_min1[,-10]
+
+#create empty vector to hold accuracies
+rmse2 <- data.frame(class_acc=rep(NA,13))
+
+for (i in 1:13) {
+
+  #remove i-th variable
+  train_min2 <- train_min1[,-i]
+  
+  #fit model minus one variable
+  model_min2 <- lm(mov~.,data=train_min2)
+  
+  #classify testing observations
+  test_min2 <- test_set %>%
+    mutate(preds=predict(model_min2,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse2$vals[i] <- sqrt(mean((test_set$mov - test_min2$preds)^2))
+}
+```
+
