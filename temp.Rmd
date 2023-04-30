@@ -61,23 +61,18 @@ summary(model_bwd)$outmat
 ```
 
 ```{r}
-model_1 <- lm(mov~.-mo_mins_pct-pct_4s-bowlers_used, data=odi[, 6:20])
-summary(model_1)
-```
-
-```{r}
 train_set <- odi %>% filter(year %in% c(2003, 2007, 2011, 2015))
-train_set <- train_set[, 6:20] %>% select(-c("mo_mins_pct", "pct_4s", "bowlers_used"))
+train_set <- train_set[, 6:20]
 ```
 
 ```{r}
 test_set <- odi %>% filter(year == 2019)
-test_set <- test_set[, 6:20] %>% select(-c("mo_mins_pct", "pct_4s", "bowlers_used"))
+test_set <- test_set[, 6:20]
 ```
 
 ```{r}
-model_train <- lm(mov~., data=train_set)
-summary(model_train)
+model_1 <- lm(mov~., data=train_set)
+summary(model_1)
 ```
 
 ```{r}
