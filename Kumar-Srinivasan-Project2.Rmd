@@ -12,6 +12,7 @@ library(knitr)
 library(tinytex)
 library(cricketdata)
 library(leaps)
+library(car)
 
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(message = FALSE)
@@ -76,7 +77,7 @@ knitr::include_graphics("~/Desktop/cor.png")
 
 ## Model Development
 
-For our model development, we decided to use a backward step-wise selection approach. Because we use a multiple regression model to predict `mov`, we decided to compare *RMSE*(Root Mean Squared Errror) for determining the "best" collection of predictor variables to include in the model. *RMSE* is the average difference between values predicted by a model and the actual values. This will tell us generally how far apart our predicted values are from the actual values. We also want to look at the *Adjusted R-Squared* value as it tells us the quality of the fitting using our model by explaining how much of the response variable's variation we are able to account for using our predictor variables. Our objective is to minimize *RMSE* and maximize *Adjusetd R-Squared*. First, we split our `odi` dataset into a *training set* and *test set*. The training set includes data from 2003 to 2005 ODI World Cups and the test set includes data from the 2019 ODI World Cup. 
+For our model development, we decided to use a backward step-wise selection approach. Because we use a multiple regression model to predict `mov`, we decided to compare *RMSE*(Root Mean Squared Errror) for determining the "best" collection of predictor variables to include in the model. *RMSE* is the average difference between values predicted by a model and the actual values. This will tell us generally how far apart our predicted values are from the actual values. We also want to look at the *Adjusted R-Squared* value as it tells us the quality of the fitting using our model by explaining how much of the response variable's variation we are able to account for using our predictor variables. Our objective is to minimize *RMSE* and maximize *Adjusetd R-Squared*. First, we split our `odi` dataset into a *training set* and *test set*. The training set includes data from 2003 to 2015 ODI World Cups and the test set includes data from the 2019 ODI World Cup. 
 
 ```{r, echo = FALSE}
 train_set <- odi %>% filter(year %in% c(2003, 2007, 2011, 2015))
@@ -96,6 +97,69 @@ rmse / (max(test_set$mov) - min(test_set$mov))
 
 After training our multiple regression model using all 14 predictor variables, we can see the *Adjusted R-Squared* value is 0.881 meaning we are able to explain 88.1% of the variation in `mov` using our 14 predictor variables. Using this model, we predicted `mov` based on the test set and calculated the *RMSE*, getting a value of around 0.153. If we normalize the *RMSE* by dividing the RMSE by the range of the test set's `mov`, we get a value of around 0.133. 
 
+```{r, echo = FALSE}
+avPlots(model_1, layout = c(3,5))
+```
+For our `odi` dataset, we have 14 potential predictor variables. Backward step-wise selection removes each of these 14 variables from the model, one at a time, and checks for improvement in the performance metric, *RMSE*. Using a loop, we remove one variable at a time from the training set. We remove the $i$-th column using `train_set[,-i]`. This allows us to iterate through columns 1 to 14.
+
+```{r, echo = FALSE}
+#create empty vector to hold accuracies
+rmse_1 <- data.frame(vals=rep(NA,14))
+
+for (i in 1:14) {
+
+  #remove i-th variable
+  train_min1 <- train_set[,-i]
+  
+  #fit model minus one variable
+  model_min1 <- lm(mov~.,data=train_min1)
+  
+  #classify testing observations
+  test_min1 <- test_set %>%
+    mutate(preds=predict(model_min1,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse_1$vals[i] <- sqrt(mean((test_set$mov - test_min1$preds)^2))
+}
+rmse_1
+```
+
+```{r, echo = FALSE}
+avPlots(model_min1, layout = c(3,5))
+```
+
+This table shows all of the different *RMSE* values after removing one predictor variable from the training set. We want to find the lowest *RMSE* value and remove the predictor variable associated with it because the variable does not contribute to reducing the *RMSE* for our model. Based on this table, the lowest *RMSE* is around 0.142 which is the 10th row and corresponds to the `mo_sr` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*. 
+
+```{r, echo = FALSE}
+#permanently remove one variable
+train_min1 <- train_set[,-10]
+
+#create empty vector to hold accuracies
+rmse_2 <- data.frame(vals=rep(NA,13))
+
+for (i in 1:13) {
+
+  #remove i-th variable
+  train_min2 <- train_min1[,-i]
+  
+  #fit model minus one variable
+  model_min2 <- lm(mov~.,data=train_min2)
+  
+  #classify testing observations
+  test_min2 <- test_set %>%
+    mutate(preds=predict(model_min2,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse_2$vals[i] <- sqrt(mean((test_set$mov - test_min2$preds)^2))
+}
+rmse_2
+```
+
+```{r, echo = FALSE}
+avPlots(model_min2, layout = c(3,5))
+```
+
+This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr` predictor variable. Based on this table, the lowest *RMSE* is around 0.138 which is the 10th row and corresponds to the `bowlers_used` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*. 
 
 ## Model Analysis
 
