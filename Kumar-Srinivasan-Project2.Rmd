@@ -284,6 +284,9 @@ rmse
 rmse/(max(odi$mov) - min(odi$mov))
 ```
 
+Our final model, after taking out `mo_sr`, `bowlers_used`, `to_bf_pct`, `pct_6s`, and `mo_mins_pct` predictor variables, has an *Adjusted R-Squared* of 0.857 and an *RMSE* value of 0.129. This means our model is able to account for 85.7% of the variation in `mov` and the predicted values are generally 12.9% off od the observed values for `mov`. 
+
+
 ## Model Analysis
 
 ## Conclusion
