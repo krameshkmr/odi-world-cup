@@ -1,10 +1,9 @@
 ---
-title: "Project Paper 2"
-author: "Srihari Srinivasan, Krishna Kumar"
-date: "2023-04-30"
+title: "A Predictive Model for ODI World Cup Matches"
+author: "Krishna Kumar, Srihari Srinivasan"
+date: "APR 30, 2023"
 output:
   pdf_document: default
-  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -22,24 +21,22 @@ knitr::opts_chunk$set(out.width = "60%")
 
 ## Introduction
 
+
 ## Exploratory Analysis
 
-```{r, echo = FALSE}
-# Importing Dataset
+```{r, echo=FALSE}
 odi <- read.csv("~/Downloads/odi.csv")
 odi$date <- as.Date(odi$date)
 odi$date <- format(odi$date, "%Y")
 odi <- rename(odi, year = date)
 ```
 
-```{r}
-
-```
-
-
 
 ## Model Development
 
+
 ## Model Analysis
 
+
 ## Conclusion
+
