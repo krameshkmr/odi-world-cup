@@ -52,17 +52,17 @@ From the figure and summary, we can see that `mov` is approximately normally dis
 ### Predictor Variables
 
 Batting metrics:\
-Given that top order batsmen (players 1, 2, and 3) generally play a different role to that of middle order batsmen (players 4, 5, 6, and 7), these metrics have been separated by batting position.\
-1. `to_runs_pct` - percentage of total runs scored by the top order\
-2. `mo_runs_pct` - percentage of total runs scored by the middle order\
-3. `to_mins_pct` - percentage of total time spent in crease by the top order\
-4. `mo_mins_pct` - percentage of total time spent in crease by the middle order\
-5. `to_bf_pct` - percentage of total balls faced by the top order\
-6. `mo_bf_pct` - percentage of total balls faced by the middle order\
+Given that top-order batsmen (players 1, 2, and 3) generally play a different role to that of middle-order batsmen (players 4, 5, 6, and 7), these metrics have been separated by batting position.\
+1. `to_runs_pct` - percentage of total runs scored by the top-order\
+2. `mo_runs_pct` - percentage of total runs scored by the middle-order\
+3. `to_mins_pct` - percentage of total time spent in crease by the top-order\
+4. `mo_mins_pct` - percentage of total time spent in crease by the middle-order\
+5. `to_bf_pct` - percentage of total balls faced by the top-order\
+6. `mo_bf_pct` - percentage of total balls faced by the middle-order\
 7. `pct_4s` - percentage of total runs that are 4s\
 8. `pct_6s` - percentage of total runs that are 6s\
-9. `to_sr` - average strike rate of the top order\
-10. `mo_sr` - average strike rate of the middle order\
+9. `to_sr` - average strike rate of the top-order\
+10. `mo_sr` - average strike rate of the middle-order\
 
 Bowling metrics:\
 1. `bowlers_used` - total number of bowlers used\
@@ -70,9 +70,25 @@ Bowling metrics:\
 3. `wkts` - total number of wickets taken\
 4. `econ` - average number of runs conceded per over bowled\
 
+The figures below are scatterplots of the pairwise relationship between predictor variables.\
+
+```{r, echo=FALSE, out.width = "100%"}
+odi[, 6:20] %>% select(c("to_runs_pct", "mo_runs_pct", "to_mins_pct", "mo_mins_pct", "to_bf_pct", "mo_bf_pct", "mov")) %>% pairs()
+```
+
+```{r, echo=FALSE, out.width = "100%"}
+odi[, 6:20] %>% select(c("pct_4s", "pct_6s", "to_sr", "mo_sr", "mov")) %>% pairs()
+```
+
+```{r, echo=FALSE, out.width = "100%"}
+odi[, 16:20] %>% pairs()
+```
+
 ```{r, echo=FALSE, out.width = "100%"}
 knitr::include_graphics("~/Desktop/cor.png")
 ```
+
+From the figures and correlation matrix, we can see that `runs_pct`, `mins_pct`, and `bf_pct` have high collinearity. This exists because the impact of a top-order batsman is not entirely independent of a middle-order batsman. Although the correlation of certain variables exceeds $\pm 0.80$, we decided to let the backward step-wise process filter out and select the metrics with the greatest effect on `mov`.
 
 ## Model Development
 
