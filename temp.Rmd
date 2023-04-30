@@ -76,20 +76,12 @@ summary(model_1)
 ```
 
 ```{r}
-predictions <- predict(model_train, test_set)
-mse <- mean((test_set$mov - predictions)^2)
-r_squared <- summary(model_train)$r.squared
-mse
-r_squared
+predictions <- predict(model_1, test_set)
+rmse <- sqrt(mean((test_set$mov - predictions)^2))
+rmse
 ```
 
 ```{r}
-odi <- odi[, 6:20] %>% select(-c("mo_mins_pct", "pct_4s", "bowlers_used"))
 
-predictions <- predict(model_train, odi)
-mse <- mean((test_set$mov - predictions)^2)
-r_squared <- summary(model_train)$r.squared
-mse
-r_squared
 ```
 
