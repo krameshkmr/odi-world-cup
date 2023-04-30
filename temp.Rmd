@@ -225,6 +225,12 @@ for (i in 1:9) {
 ```{r}
 model_odi <- lm(mov~., data=train_min5)
 summary(model_odi)
+
+predictions <- predict(model_odi, test_set)
+rmse <- sqrt(mean((test_set$mov - predictions)^2))
+
+test_set %>% ggplot(aes(x = seq(1:nrow(test_set)), y = mov)) + geom_point() + geom_smooth(method = lm, se = F) 
+plot(test_set$mov) + abline(model_odi)
 ```
 
 
