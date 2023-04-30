@@ -82,6 +82,9 @@ rmse
 ```
 
 ```{r}
+#create empty vector to hold accuracies
+rmse <- data.frame(class_acc=rep(NA,14))
+
 for (i in 1:14) {
 
   #remove i-th variable
