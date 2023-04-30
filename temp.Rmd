@@ -104,7 +104,7 @@ for (i in 1:14) {
 
 ```{r}
 #permanently remove one variable
-train_min2 <- train_min1[,-10]
+train_min1 <- train_set[,-10]
 
 #create empty vector to hold accuracies
 rmse2 <- data.frame(class_acc=rep(NA,13))
@@ -125,4 +125,107 @@ for (i in 1:13) {
   rmse2$vals[i] <- sqrt(mean((test_set$mov - test_min2$preds)^2))
 }
 ```
+
+```{r}
+#permanently remove one variable
+train_min2 <- train_min1[,-10]
+
+#create empty vector to hold accuracies
+rmse3 <- data.frame(class_acc=rep(NA,12))
+
+for (i in 1:12) {
+
+  #remove i-th variable
+  train_min3 <- train_min2[,-i]
+  
+  #fit model minus one variable
+  model_min3 <- lm(mov~.,data=train_min3)
+  
+  #classify testing observations
+  test_min3 <- test_set %>%
+    mutate(preds=predict(model_min3,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse3$vals[i] <- sqrt(mean((test_set$mov - test_min3$preds)^2))
+}
+```
+
+```{r}
+#permanently remove one variable
+train_min3 <- train_min2[,-5]
+
+#create empty vector to hold accuracies
+rmse4 <- data.frame(class_acc=rep(NA,11))
+
+for (i in 1:11) {
+
+  #remove i-th variable
+  train_min4 <- train_min3[,-i]
+  
+  #fit model minus one variable
+  model_min4 <- lm(mov~.,data=train_min4)
+  
+  #classify testing observations
+  test_min4 <- test_set %>%
+    mutate(preds=predict(model_min4,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse4$vals[i] <- sqrt(mean((test_set$mov - test_min4$preds)^2))
+}
+```
+
+```{r}
+#permanently remove one variable
+train_min4 <- train_min3[,-7]
+
+#create empty vector to hold accuracies
+rmse5 <- data.frame(class_acc=rep(NA,10))
+
+for (i in 1:10) {
+
+  #remove i-th variable
+  train_min5 <- train_min4[,-i]
+  
+  #fit model minus one variable
+  model_min5 <- lm(mov~.,data=train_min5)
+  
+  #classify testing observations
+  test_min5 <- test_set %>%
+    mutate(preds=predict(model_min5,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse5$vals[i] <- sqrt(mean((test_set$mov - test_min5$preds)^2))
+}
+```
+
+```{r}
+#permanently remove one variable
+train_min5 <- train_min4[,-4]
+
+#create empty vector to hold accuracies
+rmse6 <- data.frame(class_acc=rep(NA,9))
+
+for (i in 1:9) {
+
+  #remove i-th variable
+  train_min6 <- train_min5[,-i]
+  
+  #fit model minus one variable
+  model_min6 <- lm(mov~.,data=train_min6)
+  
+  #classify testing observations
+  test_min6 <- test_set %>%
+    mutate(preds=predict(model_min6,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse6$vals[i] <- sqrt(mean((test_set$mov - test_min6$preds)^2))
+}
+```
+
+```{r}
+model_odi <- lm(mov~., data=train_min5)
+summary(model_odi)
+```
+
+
 
