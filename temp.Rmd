@@ -82,6 +82,20 @@ rmse
 ```
 
 ```{r}
+for (i in 1:14) {
 
+  #remove i-th variable
+  train_min1 <- train_set[,-i]
+  
+  #fit model minus one variable
+  model_min1 <- lm(mov~.,data=train_min1)
+  
+  #classify testing observations
+  test_min1 <- test_set %>%
+    mutate(preds=predict(model_min1,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse$vals[i] <- sqrt(mean((test_set$mov - test_min1$preds)^2))
+}
 ```
 
