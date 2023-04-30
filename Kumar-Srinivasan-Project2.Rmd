@@ -17,7 +17,6 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(message = FALSE)
 knitr::opts_chunk$set(warning = FALSE)
 knitr::opts_chunk$set(out.width = "60%")
-#knitr::opts_chunk$set(fig.align = "center")
 ```
 
 ## Introduction
@@ -53,6 +52,7 @@ From the figure and summary, we can see that `mov` is approximately normally dis
 ### Predictor Variables
 
 Batting metrics:\
+Given that top order batsmen (players 1, 2, and 3) generally play a different role to that of middle order batsmen (players 4, 5, 6, and 7), these metrics have been separated by batting position.\
 1. `to_runs_pct` - percentage of total runs scored by the top order\
 2. `mo_runs_pct` - percentage of total runs scored by the middle order\
 3. `to_mins_pct` - percentage of total time spent in crease by the top order\
@@ -64,17 +64,15 @@ Batting metrics:\
 9. `to_sr` - average strike rate of the top order\
 10. `mo_sr` - average strike rate of the middle order\
 
-```{r}
-odi %>% 
-  select(to_runs_pct, mo_runs_pct,, to_mins_pct, mo_mins_pct, to_bf_pct, mo_bf_pct, pct_4s, pct_6s, to_sr, mo_sr, mov) %>% 
-  pairs()
+Bowling metrics:\
+1. `bowlers_used` - total number of bowlers used\
+2. `pct_mdns` - percentage of total overs that are maidens (an over in which no runs are scored)\
+3. `wkts` - total number of wickets taken\
+4. `econ` - average number of runs conceded per over bowled\
+
+```{r, echo=FALSE, out.width = "100%"}
+knitr::include_graphics("~/Desktop/cor.png")
 ```
-
-```{r}
-round(cor(odi[, 6:20]), 2)
-```
-
-
 
 ## Model Development
 
