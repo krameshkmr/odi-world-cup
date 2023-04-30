@@ -86,7 +86,7 @@ odi[, 16:20] %>% pairs()
 ```
 
 ```{r, echo=FALSE, out.width = "100%"}
-knitr::include_graphics("~/Desktop/cor.png")
+knitr::include_graphics("~/Documents/GitHub/odi-world-cup/cor.png")
 ```
 
 From the figures and correlation matrix, we can see that `runs_pct`, `mins_pct`, and `bf_pct` have high collinearity. This exists because the impact of a top-order batsman is not entirely independent of a middle-order batsman. Although the correlation of certain variables exceeds $\pm 0.80$, we decided to let the backward step-wise process filter out and select the metrics with the greatest effect on `mov`.
