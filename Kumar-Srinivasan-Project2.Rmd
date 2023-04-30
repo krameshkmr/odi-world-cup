@@ -124,10 +124,6 @@ for (i in 1:14) {
 rmse_1
 ```
 
-```{r, echo = FALSE}
-avPlots(model_min1, layout = c(3,5))
-```
-
 This table shows all of the different *RMSE* values after removing one predictor variable from the training set. We want to find the lowest *RMSE* value and remove the predictor variable associated with it because the variable does not contribute to reducing the *RMSE* for our model. Based on this table, the lowest *RMSE* is around 0.142 which is the 10th row and corresponds to the `mo_sr` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*. 
 
 ```{r, echo = FALSE}
@@ -155,11 +151,122 @@ for (i in 1:13) {
 rmse_2
 ```
 
+This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr` predictor variable. Based on this table, the lowest *RMSE* is around 0.138 which is the 10th row and corresponds to the `bowlers_used` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
+
 ```{r, echo = FALSE}
-avPlots(model_min2, layout = c(3,5))
+#permanently remove one variable
+train_min2 <- train_min1[,-10]
+
+#create empty vector to hold accuracies
+rmse_3 <- data.frame(vals=rep(NA,12))
+
+for (i in 1:12) {
+
+  #remove i-th variable
+  train_min3 <- train_min2[,-i]
+  
+  #fit model minus one variable
+  model_min3 <- lm(mov~.,data=train_min3)
+  
+  #classify testing observations
+  test_min3 <- test_set %>%
+    mutate(preds=predict(model_min3,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse_3$vals[i] <- sqrt(mean((test_set$mov - test_min3$preds)^2))
+}
+rmse_3
+```
+This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr` and `bowlers_used` predictor variables. Based on this table, the lowest *RMSE* is around 0.136 which is the 5th row and corresponds to the `to_bf_pct` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
+
+```{r, echo = FALSE}
+#permanently remove one variable
+train_min3 <- train_min2[,-5]
+
+#create empty vector to hold accuracies
+rmse_4 <- data.frame(vals=rep(NA,11))
+
+for (i in 1:11) {
+
+  #remove i-th variable
+  train_min4 <- train_min3[,-i]
+  
+  #fit model minus one variable
+  model_min4 <- lm(mov~.,data=train_min4)
+  
+  #classify testing observations
+  test_min4 <- test_set %>%
+    mutate(preds=predict(model_min4,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse_4$vals[i] <- sqrt(mean((test_set$mov - test_min4$preds)^2))
+}
+rmse_4
 ```
 
-This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr` predictor variable. Based on this table, the lowest *RMSE* is around 0.138 which is the 10th row and corresponds to the `bowlers_used` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*. 
+This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr`, `bowlers_used`, and `to_bf_pct` predictor variables. Based on this table, the lowest *RMSE* is around 0.1339 which is the 7th row and corresponds to the `pct_6s` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
+
+```{r, echo = FALSE}
+#permanently remove one variable
+train_min4 <- train_min3[,-7]
+
+#create empty vector to hold accuracies
+rmse_5 <- data.frame(vals=rep(NA,10))
+
+for (i in 1:10) {
+
+  #remove i-th variable
+  train_min5 <- train_min4[,-i]
+  
+  #fit model minus one variable
+  model_min5 <- lm(mov~.,data=train_min5)
+  
+  #classify testing observations
+  test_min5 <- test_set %>%
+    mutate(preds=predict(model_min5,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse_5$vals[i] <- sqrt(mean((test_set$mov - test_min5$preds)^2))
+}
+rmse_5
+```
+This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr`, `bowlers_used`, `to_bf_pct`, and `pct_6s` predictor variables. Based on this table, the lowest *RMSE* is around 0.129 which is the 4th row and corresponds to the `mo_mins_pct` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
+
+```{r, echo = FALSE}
+#permanently remove one variable
+train_min5 <- train_min4[,-4]
+
+#create empty vector to hold accuracies
+rmse_6 <- data.frame(vals=rep(NA,9))
+
+for (i in 1:9) {
+
+  #remove i-th variable
+  train_min6 <- train_min5[,-i]
+  
+  #fit model minus one variable
+  model_min6 <- lm(mov~.,data=train_min6)
+  
+  #classify testing observations
+  test_min6 <- test_set %>%
+    mutate(preds=predict(model_min6,newdata=test_set))
+  
+  #compute and save overall accuracy
+  rmse_6$vals[i] <- sqrt(mean((test_set$mov - test_min6$preds)^2))
+}
+rmse_6
+```
+This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr`, `bowlers_used`, `to_bf_pct`, `pct_6s`, and `mo_mins_pct` predictor variables. Based on this table, the lowest *RMSE* is 0.128862 which is the 4th row but this value is actually higher than the previous lowest *RMSE* value. This means we can stop the process and create our final model with the collection of predictor variables our backwards step-wise selection process determined. 
+
+```{r, echo = FALSE}
+model_odi <- lm(mov~., data=train_min5)
+summary(model_odi)
+
+predictions <- predict(model_odi, test_set)
+rmse <- sqrt(mean((test_set$mov - predictions)^2))
+rmse
+rmse/(max(odi$mov) - min(odi$mov))
+```
 
 ## Model Analysis
 
