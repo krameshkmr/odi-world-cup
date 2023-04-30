@@ -70,6 +70,11 @@ odi %>%
   pairs()
 ```
 
+```{r}
+round(cor(odi[, 6:20]), 2)
+```
+
+
 
 ## Model Development
 
