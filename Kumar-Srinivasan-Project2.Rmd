@@ -310,12 +310,11 @@ Verifying the relationships with the updated added-variable plots.\
 avPlots(model_odi, layout = c(3,3))
 ```
 
-### Final Model
-
-mov = -0.68 - 0.84 * to_runs_pct - 0.02 * mo_runs_pct + 1.34 * to_mins_pct + 0.49 * mo_bf_pct +\
-0.04 * pct_4s + 0.004 * to_sr + 0.80 * pct_mdns + 0.05 * wkts - 0.07 * econ
-
 ## Model Analysis
+
+$$
+\text{mov} = -0.684 - 0.840*\text{to_runs_pct} - 0.020*\text{mo_runs_pct} + 1.336*\text{to_mins_pct} + 0.492*\text{mo_bf_pct} + 0.039*\text{pct_4s} + 0.004*\text{to_sr} + 0.799*\text{pct_mdns} + 0.051*\text{wkts} - 0.065*\text{econ}
+$$
 
 ```{r, echo=FALSE}
 final_set <- odi %>% select(to_runs_pct, mo_runs_pct, to_mins_pct, mo_bf_pct, pct_4s, to_sr, pct_mdns, wkts, econ, mov)
@@ -325,6 +324,22 @@ nrmse <- rmse / (max(odi$mov) - min(odi$mov))
 ```
 
 To analyze our final model, we test it on the entire dataset of all five World Cups. The model's final *adjusted R-squared* is 0.857, which means we are able to account for 85.7% of the variation in `mov`. With a final *RMSE* of 0.138, our predicted values generally differ from the observed values of `mov` by 13.8%. However, normalizing this value results in 0.08 or 8%. Before applying the backwards step-wise process, our first model had an *adjusted R-squared* of 0.881 and a *RMSE* of 0.153. Comparing the two models, our *adjusted R-squared* decreased by around 3%, however we were also able to decrease *RMSE* by around 2%. We believe that this trade-off is ultimately worth it as this model best minimizes the difference between predicted and observed values. Thereby, prioritizing the accuracy of the model's predictions rather than the overall quality of the model's fit to the data.
+
+We can analyze our model's accuracy by testing it using one random ODI World Cup match throughout the years. The match we used is a match from the 2007 ODI World Cup of Bangladesh versus New Zealand. The `mov` for the match was -0.413 and the predicted `mov` was -0.619. Our predicted `mov` value is -0.206 off of the observed `mov` value which indicates our model is fairly accurate and not too far off of the observed value.
+
+```{r, echo = FALSE}
+# Take a random game and predict mov
+set.seed(1)
+
+match_rand <- odi[sample(1:nrow(odi), 1), ]
+
+match_rand$mov
+predict(model_odi, match_rand)
+
+predict(model_odi, match_rand) - match_rand$mov
+
+```
+
 
 The figure below is a scatterplot of the predicted values and their residuals.\
 
@@ -336,18 +351,7 @@ as.data.frame(predictions) %>%
   geom_hline(yintercept = 0, color="red")
 ```
 
-We can analyze our model's accuracy by testing it on a random match. We randomly sampled a 2007 match between Bangladesh and New Zealand. The actual `mov` for the match was -0.413 and the predicted `mov` was -0.619. Our predicted value is off by 0.206, which indicates that our model is fairly accurate.
-
-```{r, echo=FALSE}
-set.seed(1)
-match_rand <- odi[sample(1:nrow(odi), 1), ]
-
-match_rand$mov
-predict(model_odi, match_rand)
-
-predict(model_odi, match_rand) - match_rand$mov
-```
 
 ## Conclusion
 
-We can conclude that `to_runs_pct`, `mo_runs_pct`, `to_mins_pct`, `mo_bf_pct`, `pct_4s`, `to_sr`, `pct_mdns`, `wkts`, and `econ` are the variables that best predict `mov`. Due to either multicollinearity or low correlation, `mo_mins_pct`, `to_bf_pct`, `pct_6s`, `mo_sr`, and `bowlers_used` were excluded from our model. This is somewhat surprising as we believed that `mo_mins_pct` and `mo_sr` would have a greater impact on `mov`, particularly since the role of middle-order batsmen has been heightened since the introduction of the T20 format. The lack of `pct_6s` inclusion in the model is not as surprising as we expect batsmen to score more of their boundaries through 4s in a longer format where each wicket is more "valuable." We initially included `bowlers_used` on a suspicion that the more bowlers a team employed, the less faith they had in their front-line bowlers, implying that they had a weaker bowling lineup overall. This, however, was proven not to be the case as whether a team used 4 bowlers or 8, there was no effect on `mov`. Given more time, we would incorporate non-World Cup data in order to assess whether the chosen predictor variables would differ depending on more varied playing conditions.
+We can conclude that `to_runs_pct`, `mo_runs_pct`, `to_mins_pct`, `mo_bf_pct`, `pct_4s`, `to_sr`, `pct_mdns`, `wkts`, and `econ` are the variables that best predict `mov`. Due to either multicollinearity or low correlation, `mo_mins_pct`, `to_bf_pct`, `pct_6s`, `mo_sr`, and `bowlers_used` were excluded from our model. This is somewhat surprising as we believed that `mo_mins_pct` and `mo_sr` would have a greater impact on `mov`, particularly since the role of middle-order batsmen has been heightened since the introduction of the T20 format. The lack of `pct_6s` inclusion in the model is not as surprising as we expect batsmen to score more of their boundaries through 4s in a longer format where each wicket is more "valuable." We initially included `bowlers_used` on a suspicion that the more bowlers a team employed, the less faith they had in their front-line bowlers, implying that they had a weaker bowling lineup overall. This, however, was proven not to be the case as whether a team used 4 bowlers or 8, there was no effect on `mov`. Given more time, we would incorporate non-World Cup data in order to better assess whether 
