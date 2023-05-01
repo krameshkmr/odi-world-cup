@@ -312,4 +312,31 @@ avPlots(model_odi, layout = c(3,3))
 
 ## Model Analysis
 
+```{r}
+final_set <- odi %>% select(to_runs_pct, mo_runs_pct, to_mins_pct, mo_bf_pct, pct_4s, to_sr, pct_mdns, wkts, econ, mov)
+summary(model_odi)
+predictions <- predict(model_odi, final_set)
+rmse <- sqrt(mean((final_set$mov - predictions)^2))
+rmse
+rmse/(max(odi$mov) - min(odi$mov))
+```
+To analyze our final model, we train the model with the training set with the collection of predictor variables determined by our backwards step-wise selection process and the test the model on the entire dataset. The model's *Adjusted R-Squared* is 0.857 which means we are able to account for 85.7% of the variation in `mov` based on our predictor variables. The *RMSE* is around 0.138 which means our predicted values generally differ from the observed values of `mov` by 13.8%. The normalized *RMSE* is around 0.08. The normalized *RMSE* gives an *RMSE* value that depicts the error based on the range of our dataset. Using this value, this means our predicted values differ from the observed values of `mov` by around 8%. Before doing the backwards step-wise selection process, the first model we made had an *Adjusted R-Squared* of 0.881 and an *RMSE* of around 0.153. Comparing our final model to our first one, our *Adjusted R-Squared* decreased by around 3% and the *RMSE* decreased by around 1%. The decrease of the *Adjusted R-Squared* value by 3% is not that significant because we were able to improve our *RMSE* by a 1% which is more important. 
+
+```{r}
+model_coefs <- coef(model_odi)
+final_set %>% 
+  ggplot(aes(x = predictions, y = mov)) + 
+  geom_point() +
+  geom_smooth(method = lm)
+```
+```{r}
+resids <- final_set$mov - predictions
+as.data.frame(predictions) %>% 
+  ggplot(aes(predictions, resids)) + 
+  geom_point() +
+  geom_hline(yintercept = 0)
+```
+
+
+
 ## Conclusion
