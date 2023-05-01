@@ -93,9 +93,9 @@ From the figures and correlation matrix, we can see that `runs_pct`, `mins_pct`,
 
 ## Model Development
 
-For our model development, we decided to use a backward step-wise selection approach. Because we use a multiple regression model to predict `mov`, we decided to compare *RMSE*(Root Mean Squared Errror) for determining the "best" collection of predictor variables to include in the model. *RMSE* is the average difference between values predicted by a model and the actual values. This will tell us generally how far apart our predicted values are from the actual values. We also want to look at the *Adjusted R-Squared* value as it tells us the quality of the fitting using our model by explaining how much of the response variable's variation we are able to account for using our predictor variables. Our objective is to minimize *RMSE* and maximize *Adjusetd R-Squared*. First, we split our `odi` dataset into a *training set* and *test set*. The training set includes data from 2003 to 2015 ODI World Cups and the test set includes data from the 2019 ODI World Cup. 
+Our objective at each step of the backward step-wise selection process is to minimize *RMSE* and maximize *adjusted R-squared*. First, we split our data into training and test sets. The training set consists of World Cup matches from 2003 to 2015, whereas the test set is composed solely of 2019 data.\
 
-```{r, echo = FALSE}
+```{r, echo=FALSE}
 train_set <- odi %>% filter(year %in% c(2003, 2007, 2011, 2015))
 train_set <- train_set[, 6:20]
 
@@ -104,21 +104,35 @@ test_set <- test_set[, 6:20]
 
 model_1 <- lm(mov~., data=train_set)
 summary(model_1)
+```
 
+After training our model using all 14 predictor variables, we observe an *adjusted R-squared* value of 0.881, meaning we are able to explain 88.1% of the variation in `mov` with all 14 variables.
+
+Using this model, we predict `mov` based on the test set and calculate the *RMSE* value displayed below.
+
+```{r, echo=FALSE}
 predictions <- predict(model_1, test_set)
 rmse <- sqrt(mean((test_set$mov - predictions)^2))
 rmse
+```
+
+Normalizing this by dividing *RMSE* by the range of `mov` from the test set results in the following value.
+
+```{r, echo=FALSE}
 rmse / (max(test_set$mov) - min(test_set$mov))
 ```
 
-After training our multiple regression model using all 14 predictor variables, we can see the *Adjusted R-Squared* value is 0.881 meaning we are able to explain 88.1% of the variation in `mov` using our 14 predictor variables. Using this model, we predicted `mov` based on the test set and calculated the *RMSE*, getting a value of around 0.153. If we normalize the *RMSE* by dividing the RMSE by the range of the test set's `mov`, we get a value of around 0.133. 
+We further verify these relationships with the use of added-variable plots.\
 
-```{r, echo = FALSE}
+```{r, echo=FALSE, out.width = "100%"}
 avPlots(model_1, layout = c(3,5))
 ```
-For our `odi` dataset, we have 14 potential predictor variables. Backward step-wise selection removes each of these 14 variables from the model, one at a time, and checks for improvement in the performance metric, *RMSE*. Using a loop, we remove one variable at a time from the training set. We remove the $i$-th column using `train_set[,-i]`. This allows us to iterate through columns 1 to 14.
 
-```{r, echo = FALSE}
+Backward step-wise selection removes each of these 14 variables from the model, one at a time, and checks for improvement in the performance metric *RMSE*. Using a loop, we remove one variable at a time from the training set. We remove the $i$-th column using `train_set[,-i]`. This allows us to iterate through columns 1 to 14.
+
+We want to find the lowest *RMSE* value from the table below and remove the predictor variable associated with it. The lowest value appears to be 0.142 which is the 10th row and corresponds to the `mo_sr` variable. We will then remove this variable from the training set and repeat this process.
+
+```{r, echo=FALSE}
 #create empty vector to hold accuracies
 rmse_1 <- data.frame(vals=rep(NA,14))
 
@@ -140,9 +154,9 @@ for (i in 1:14) {
 rmse_1
 ```
 
-This table shows all of the different *RMSE* values after removing one predictor variable from the training set. We want to find the lowest *RMSE* value and remove the predictor variable associated with it because the variable does not contribute to reducing the *RMSE* for our model. Based on this table, the lowest *RMSE* is around 0.142 which is the 10th row and corresponds to the `mo_sr` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*. 
+The table below shows all of the *RMSE* values after removing `mo_sr`. The lowest value appears to be 0.138 which is the 10th row and corresponds to the `bowlers_used` variable. We will then remove this variable from the training set and repeat this process.
 
-```{r, echo = FALSE}
+```{r, echo=FALSE}
 #permanently remove one variable
 train_min1 <- train_set[,-10]
 
@@ -167,9 +181,9 @@ for (i in 1:13) {
 rmse_2
 ```
 
-This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr` predictor variable. Based on this table, the lowest *RMSE* is around 0.138 which is the 10th row and corresponds to the `bowlers_used` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
+The table below shows all of the *RMSE* values after removing `bowlers_used`. The lowest value appears to be 0.136 which is the 5th row and corresponds to the `to_bf_pct` variable. We will then remove this variable from the training set and repeat this process.
 
-```{r, echo = FALSE}
+```{r, echo=FALSE}
 #permanently remove one variable
 train_min2 <- train_min1[,-10]
 
@@ -193,9 +207,10 @@ for (i in 1:12) {
 }
 rmse_3
 ```
-This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr` and `bowlers_used` predictor variables. Based on this table, the lowest *RMSE* is around 0.136 which is the 5th row and corresponds to the `to_bf_pct` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
 
-```{r, echo = FALSE}
+The table below shows all of the *RMSE* values after removing `to_bf_pct`. The lowest value appears to be 0.1339 which is the 7th row and corresponds to the `pct_6s` variable. We will then remove this variable from the training set and repeat this process.
+
+```{r, echo=FALSE}
 #permanently remove one variable
 train_min3 <- train_min2[,-5]
 
@@ -220,9 +235,9 @@ for (i in 1:11) {
 rmse_4
 ```
 
-This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr`, `bowlers_used`, and `to_bf_pct` predictor variables. Based on this table, the lowest *RMSE* is around 0.1339 which is the 7th row and corresponds to the `pct_6s` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
+The table below shows all of the *RMSE* values after removing `pct_6s`. The lowest value appears to be 0.12886 which is the 4th row and corresponds to the `mo_mins_pct` variable. We will then remove this variable from the training set and repeat this process.
 
-```{r, echo = FALSE}
+```{r, echo=FALSE}
 #permanently remove one variable
 train_min4 <- train_min3[,-7]
 
@@ -246,9 +261,10 @@ for (i in 1:10) {
 }
 rmse_5
 ```
-This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr`, `bowlers_used`, `to_bf_pct`, and `pct_6s` predictor variables. Based on this table, the lowest *RMSE* is around 0.129 which is the 4th row and corresponds to the `mo_mins_pct` predictor variable. Now, we will permanently remove this variable from the training set and repeat this process again to keep minimizing the *RMSE*.
 
-```{r, echo = FALSE}
+The table below shows all of the *RMSE* values after removing `mo_mins_pct`. The lowest value appears to be 0.1289 which is the 2nd row and corresponds to the `mo_runs_pct` variable. However, since this value is slightly higher than the previous lowest *RMSE* value, we can stop the process and create our final model.
+
+```{r, echo=FALSE}
 #permanently remove one variable
 train_min5 <- train_min4[,-4]
 
@@ -272,23 +288,27 @@ for (i in 1:9) {
 }
 rmse_6
 ```
-This table shows all of the different *RMSE* values after removing one predictor variable from the training set without the `mo_sr`, `bowlers_used`, `to_bf_pct`, `pct_6s`, and `mo_mins_pct` predictor variables. Based on this table, the lowest *RMSE* is 0.128862 which is the 4th row but this value is actually higher than the previous lowest *RMSE* value. This means we can stop the process and create our final model with the collection of predictor variables our backwards step-wise selection process determined. 
 
-```{r, echo = FALSE}
+Our final model, after taking out `mo_sr`, `bowlers_used`, `to_bf_pct`, `pct_6s`, and `mo_mins_pct`, has an *adjusted R-Squared* of 0.857 and an *RMSE* value of 0.129. Therefore, we are able to account for 85.7% of the variation in `mov`.
+
+```{r, echo=FALSE}
 model_odi <- lm(mov~., data=train_min5)
 summary(model_odi)
+```
 
+Normalizing the *RMSE* results in the below value.
+
+```{r, echo=FALSE}
 predictions <- predict(model_odi, test_set)
 rmse <- sqrt(mean((test_set$mov - predictions)^2))
-rmse
-rmse/(max(odi$mov) - min(odi$mov))
-```
-```{r}
-avPlots(model_odi, layout = c(3, 3))
+rmse / (max(odi$mov) - min(odi$mov))
 ```
 
+Verifying the relationships with the updated added-variable plots.\
 
-Our final model, after taking out `mo_sr`, `bowlers_used`, `to_bf_pct`, `pct_6s`, and `mo_mins_pct` predictor variables, has an *Adjusted R-Squared* of 0.857 and an *RMSE* value of 0.129. This means our model is able to account for 85.7% of the variation in `mov` and the predicted values are generally 12.9% off od the observed values for `mov`. 
+```{r, echo=FALSE, out.width = "100%"}
+avPlots(model_odi, layout = c(3,3))
+```
 
 ## Model Analysis
 
