@@ -312,6 +312,9 @@ avPlots(model_odi, layout = c(3,3))
 
 ## Model Analysis
 
+$$
+\text{mov} = -0.684 + -0.84*\text{to_runs_pct}
+$$
 ```{r, echo=FALSE}
 final_set <- odi %>% select(to_runs_pct, mo_runs_pct, to_mins_pct, mo_bf_pct, pct_4s, to_sr, pct_mdns, wkts, econ, mov)
 predictions <- predict(model_odi, final_set)
@@ -320,6 +323,22 @@ nrmse <- rmse / (max(odi$mov) - min(odi$mov))
 ```
 
 To analyze our final model, we test it on the entire dataset of all five World Cups. The model's final *adjusted R-squared* is 0.857, which means we are able to account for 85.7% of the variation in `mov`. With a final *RMSE* of 0.138, our predicted values generally differ from the observed values of `mov` by 13.8%. However, normalizing this value results in 0.08 or 8%. Before applying the backwards step-wise process, our first model had an *adjusted R-squared* of 0.881 and a *RMSE* of 0.153. Comparing the two models, our *adjusted R-squared* decreased by around 3%, however we were also able to decrease *RMSE* by around 2%. We believe that this trade-off is ultimately worth it as this model best minimizes the difference between predicted and observed values. Thereby, prioritizing the accuracy of the model's predictions rather than the overall quality of the model's fit to the data.
+
+We can analyze our model's accuracy by testing it using one random ODI World Cup match throughout the years. The match we used is a match from the 2007 ODI World Cup of Bangladesh versus New Zealand. The `mov` for the match was -0.413 and the predicted `mov` was -0.619. Our predicted `mov` value is -0.206 off of the observed `mov` value which indicates our model is fairly accurate and not too far off of the observed value.
+
+```{r, echo = FALSE}
+# Take a random game and predict mov
+set.seed(1)
+
+match_rand <- odi[sample(1:nrow(odi), 1), ]
+
+match_rand$mov
+predict(model_odi, match_rand)
+
+predict(model_odi, match_rand) - match_rand$mov
+
+```
+
 
 The figure below is a scatterplot of the predicted values and their residuals.\
 
@@ -330,6 +349,7 @@ as.data.frame(predictions) %>%
   geom_point() +
   geom_hline(yintercept = 0, color="red")
 ```
+
 
 ## Conclusion
 
