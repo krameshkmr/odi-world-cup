@@ -313,8 +313,9 @@ avPlots(model_odi, layout = c(3,3))
 ## Model Analysis
 
 $$
-\text{mov} = -0.684 + -0.84*\text{to_runs_pct}
+\text{mov} = -0.684 - 0.840*\text{to_runs_pct} - 0.020*\text{mo_runs_pct} + 1.336*|text{to_mins_pct} + 0.492*\text{mo_bf_pct} + 0.039*\text{pct_4s} + 0.004*\text{to_sr} + 0.799*\text{pct_mdns} + 0.051*\text{wkts} - 0.065*\text{econ}
 $$
+
 ```{r, echo=FALSE}
 final_set <- odi %>% select(to_runs_pct, mo_runs_pct, to_mins_pct, mo_bf_pct, pct_4s, to_sr, pct_mdns, wkts, econ, mov)
 predictions <- predict(model_odi, final_set)
