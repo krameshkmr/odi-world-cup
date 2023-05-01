@@ -289,7 +289,7 @@ for (i in 1:9) {
 rmse_6
 ```
 
-Our final model, after taking out `mo_sr`, `bowlers_used`, `to_bf_pct`, `pct_6s`, and `mo_mins_pct`, has an *adjusted R-Squared* of 0.857 and an *RMSE* value of 0.129. Therefore, we are able to account for 85.7% of the variation in `mov`.
+Our final model, after taking out `mo_sr`, `bowlers_used`, `to_bf_pct`, `pct_6s`, and `mo_mins_pct`, has an *adjusted R-Squared* of 0.857 and a *RMSE* value of 0.129. Therefore, we are able to account for 85.7% of the variation in `mov`.
 
 ```{r, echo=FALSE}
 model_odi <- lm(mov~., data=train_min5)
@@ -312,31 +312,25 @@ avPlots(model_odi, layout = c(3,3))
 
 ## Model Analysis
 
-```{r}
+```{r, echo=FALSE}
 final_set <- odi %>% select(to_runs_pct, mo_runs_pct, to_mins_pct, mo_bf_pct, pct_4s, to_sr, pct_mdns, wkts, econ, mov)
-summary(model_odi)
 predictions <- predict(model_odi, final_set)
 rmse <- sqrt(mean((final_set$mov - predictions)^2))
-rmse
-rmse/(max(odi$mov) - min(odi$mov))
+nrmse <- rmse / (max(odi$mov) - min(odi$mov))
 ```
-To analyze our final model, we train the model with the training set with the collection of predictor variables determined by our backwards step-wise selection process and the test the model on the entire dataset. The model's *Adjusted R-Squared* is 0.857 which means we are able to account for 85.7% of the variation in `mov` based on our predictor variables. The *RMSE* is around 0.138 which means our predicted values generally differ from the observed values of `mov` by 13.8%. The normalized *RMSE* is around 0.08. The normalized *RMSE* gives an *RMSE* value that depicts the error based on the range of our dataset. Using this value, this means our predicted values differ from the observed values of `mov` by around 8%. Before doing the backwards step-wise selection process, the first model we made had an *Adjusted R-Squared* of 0.881 and an *RMSE* of around 0.153. Comparing our final model to our first one, our *Adjusted R-Squared* decreased by around 3% and the *RMSE* decreased by around 1%. The decrease of the *Adjusted R-Squared* value by 3% is not that significant because we were able to improve our *RMSE* by a 1% which is more important. 
 
-```{r}
-model_coefs <- coef(model_odi)
-final_set %>% 
-  ggplot(aes(x = predictions, y = mov)) + 
-  geom_point() +
-  geom_smooth(method = lm)
-```
-```{r}
+To analyze our final model, we test it on the entire dataset of all five World Cups. The model's final *adjusted R-squared* is 0.857, which means we are able to account for 85.7% of the variation in `mov`. With a final *RMSE* of 0.138, our predicted values generally differ from the observed values of `mov` by 13.8%. However, normalizing this value results in 0.08 or 8%. Before applying the backwards step-wise process, our first model had an *adjusted R-squared* of 0.881 and a *RMSE* of 0.153. Comparing the two models, our *adjusted R-squared* decreased by around 3%, however we were also able to decrease *RMSE* by around 2%. We believe that this trade-off is ultimately worth it as this model best minimizes the difference between predicted and observed values. Thereby, prioritizing the accuracy of the model's predictions rather than the overall quality of the model's fit to the data.
+
+The figure below is a scatterplot of the predicted values and their residuals.\
+
+```{r, echo=FALSE}
 resids <- final_set$mov - predictions
 as.data.frame(predictions) %>% 
   ggplot(aes(predictions, resids)) + 
   geom_point() +
-  geom_hline(yintercept = 0)
+  geom_hline(yintercept = 0, color="red")
 ```
 
-
-
 ## Conclusion
+
+We can conclude that `to_runs_pct`, `mo_runs_pct`, `to_mins_pct`, `mo_bf_pct`, `pct_4s`, `to_sr`, `pct_mdns`, `wkts`, and `econ` are the variables that best predict `mov`. Due to either multicollinearity or low correlation, `mo_mins_pct`, `to_bf_pct`, `pct_6s`, `mo_sr`, and `bowlers_used` were excluded from our model. This is somewhat surprising as we believed that `mo_mins_pct` and `mo_sr` would have a greater impact on `mov`, particularly since the role of middle-order batsmen has been heightened since the introduction of the T20 format. The lack of `pct_6s` inclusion in the model is not as surprising as we expect batsmen to score more of their boundaries through 4s in a longer format where each wicket is more "valuable." We initially included `bowlers_used` on a suspicion that the more bowlers a team employed, the less faith they had in their front-line bowlers, implying that they had a weaker bowling lineup overall. This, however, was proven not to be the case as whether a team used 4 bowlers or 8, there was no effect on `mov`.
